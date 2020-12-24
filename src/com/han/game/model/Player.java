@@ -171,7 +171,7 @@ public class Player extends GameObject {
 						} else { // 否则为 得点
 							p.bgm[10].play();
 							tmp.erase();
-							score += 10;
+							score += 100;
 							break;
 						}
 					}

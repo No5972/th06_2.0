@@ -244,6 +244,7 @@ public class Enemy extends GameObject {
 				}
 				if (life > 0) {
 					life--;
+					p.player.setScore(1);
 					tmp.erase();
 				}
 				if (life <= 0) {

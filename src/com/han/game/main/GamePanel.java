@@ -483,6 +483,8 @@ MouseMotionListener {
 						getResource("/images/end03.jpg"));
 				Image ve = imageicon.getImage();
 				g.drawImage(ve, 0, 0, 850, 1000, 0, 0, 640, 480, null);
+				g.drawString("終 わ り", 350, 20);
+				g.drawString("最终得点：" + player.getScore(), 300, 40);
 				if ((moveP.getX() >= 740 && moveP.getX() <= 815) &&
 						(moveP.getY() >= 200 && moveP.getY() <= 720)) {
 					Color c = g.getColor();
