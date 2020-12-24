@@ -250,6 +250,7 @@ public class Enemy extends GameObject {
 					p.player.setScore(type);
 					double a = px;
 					double y = py;
+					p.bgm[9].play();
 					erase();
 					if ((tmp = p.bullets.getEmpty()) != null) {
 						int temp = new Random().nextInt(40); // 生成0到40的随机数

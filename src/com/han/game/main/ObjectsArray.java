@@ -2,6 +2,7 @@ package com.han.game.main;
 
 import java.awt.Graphics;
 
+import com.han.game.enums.HitObject;
 import com.han.game.model.Boss;
 import com.han.game.model.Bullet;
 import com.han.game.model.Enemy;
@@ -71,6 +72,19 @@ public class ObjectsArray {
 		for (i = 0; i < arrayMax; i++)
 			gameObject[i].erase();
 	}
+	
+	/**
+	 * 临时 - 只移除子弹
+	 */
+	public void eraseBullet() {
+		for (i = 0; i < arrayMax; i++)
+			if (gameObject[i].getSize() != HitObject.LIFE.getSize() &&
+					gameObject[i].getSize() != HitObject.BOMB.getSize() &&
+					gameObject[i].getSize() != HitObject.POINT.getSize() &&
+					gameObject[i].getSize() != HitObject.POWER.getSize())
+				gameObject[i].erase();
+	}
+	
 	// 返回空闲数组位
 	public GameObject getEmpty() {
 		for (i = 0; i < arrayMax; i++) {

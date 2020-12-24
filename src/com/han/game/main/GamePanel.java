@@ -91,7 +91,7 @@ MouseMotionListener {
 		isM = false;
 		time = 0;
 		time2 = 0;
-		bgm = new AudioClip[8];
+		bgm = new AudioClip[32];
 		time3 = 0;
 		time4 = -1;
 		timepaint = 1;
@@ -132,6 +132,9 @@ MouseMotionListener {
 	    bgm[5]=Applet.newAudioClip(getClass().getResource("/sounds/skill.wav"));
 	    bgm[6]=Applet.newAudioClip(getClass().getResource("/sounds/th06_17.wav"));
 	    bgm[7]=Applet.newAudioClip(getClass().getResource("/sounds/don00.wav"));
+	    bgm[8]=Applet.newAudioClip(getClass().getResource("/sounds/se_plst00.wav")); // 攻击
+	    bgm[9]=Applet.newAudioClip(getClass().getResource("/sounds/se_slash.wav")); // 小怪被毁
+	    bgm[10]=Applet.newAudioClip(getClass().getResource("/sounds/se_item00.wav")); // 拾取道具
 
 		// 开启焦点-按键
 		setFocusable(true);

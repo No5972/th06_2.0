@@ -67,7 +67,7 @@ public class Player extends GameObject {
 					tmp.setData(280, 900, 0, -20, 101, 0, 0, 0, 'n');
 					p.bgm[5].play();
 					boom--;
-					p.bullets.allErase();
+					p.bullets.eraseBullet();
 					getkeys.x = false;
 				}
 			}
@@ -130,6 +130,8 @@ public class Player extends GameObject {
 								-Math.sin(Math.toRadians(j)) * 24, 20, 0,
 								0, 0, 'n');
 					}
+				
+				p.bgm[8].play(); // 攻击音效
 			}
 
 			// 限制移动范围
@@ -162,10 +164,12 @@ public class Player extends GameObject {
 					if (25 > Math.hypot((px + 5) - (tmp.getPx() + tmp.getSize() / 2),
 							(py + 30) - (tmp.getPy() + tmp.getSize() / 2))) {
 						if (tmp.size == HitObject.POWER.getSize()) { // 灵力
+							p.bgm[10].play();
 							tmp.erase();
 							power++;
 							break;
 						} else { // 否则为 得点
+							p.bgm[10].play();
 							tmp.erase();
 							score += 10;
 							break;
@@ -175,6 +179,7 @@ public class Player extends GameObject {
 					if (25 > Math.hypot((px + 5) - (tmp.getPx() + tmp.getSize() / 2),
 							(py + 30) - (tmp.getPy() + tmp.getSize() / 2))) {
 						tmp.erase();
+						p.bgm[10].play();
 						if (boom < 10) {
 							boom++;
 						}
@@ -184,6 +189,7 @@ public class Player extends GameObject {
 					if (25 > Math.hypot((px + 5) - (tmp.getPx() + tmp.getSize() / 2),
 							(py + 30) - (tmp.getPy() + tmp.getSize() / 2))) {
 						tmp.erase();
+						p.bgm[10].play();
 						if (life < 10) {
 							life++;
 						}
