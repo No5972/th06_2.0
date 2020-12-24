@@ -1,5 +1,7 @@
 package com.han.game.model;
 
+import com.han.game.enums.MenuMode;
+
 import java.awt.Graphics;
 import java.util.Random;
 
@@ -276,7 +278,7 @@ public class Enemy extends GameObject {
 		if (p.player.frame > 3300) {
 			if (life <= 0) {
 				System.out.println("Ö´ÐÐ");
-				p.setMenuMode(6);
+				p.setMenuMode(MenuMode.THE_END.getMode());
 				p.setTime2(0);
 				p.bGM(6, 2);
 			}

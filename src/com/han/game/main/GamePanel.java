@@ -19,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import com.han.game.control.GetKeys;
+import com.han.game.enums.MenuMode;
 import com.han.game.model.GameObject;
 import com.han.game.model.Player;
 
@@ -86,7 +87,7 @@ MouseMotionListener {
 		shoots = new ObjectsArray("Shoot", 200);
 		bullets = new ObjectsArray("Bullet", 400);
 		boss = new ObjectsArray("Boss", 10);
-		menuMode = 0;
+		menuMode = MenuMode.MAIN_MENU.getMode();
 		isM = false;
 		time = 0;
 		time2 = 0;
@@ -191,7 +192,7 @@ MouseMotionListener {
 	 * 游戏初次载入
 	 */
 	public void gameSet() {
-		menuMode = 0;
+		menuMode = MenuMode.MAIN_MENU.getMode();
 		// 载入角色信息
 		player.setData(312, 539, 0, 0, 1, 0, 0, 10, 'n');
 		shoots.allErase();
@@ -204,7 +205,7 @@ MouseMotionListener {
 	 * 游戏资源更新
 	 */
 	public void gameUpdate() {
-		if (menuMode == 3) {
+		if (menuMode == MenuMode.LOADING.getMode()) {
 			bGM(1, 0);
 			bullets.allMove();
 			shoots.allMove();
@@ -212,7 +213,7 @@ MouseMotionListener {
 			boss.allMove();
 			player.move(getKeys);
 			if (getKeys.esc) {
-				setMenuMode(7);
+				setMenuMode(MenuMode.PAUSE.getMode());
 				getKeys.esc = false;
 			}
 			
@@ -282,8 +283,8 @@ MouseMotionListener {
 		// 分数和火力
 		paintScore(g);
 		
-		if (menuMode != 3) {
-			if (menuMode == 0) {
+		if (menuMode != MenuMode.LOADING.getMode()) {
+			if (menuMode == MenuMode.MAIN_MENU.getMode()) { // 主菜单
 				bGM(0, 1);
 				// 游戏开始界面
 				ImageIcon imageicon = new ImageIcon(getClass().
@@ -327,7 +328,7 @@ MouseMotionListener {
 						getKeys.up = false;
 					}
 					if (getKeys.z) {
-						setMenuMode(3);
+						setMenuMode(MenuMode.LOADING.getMode());
 					}
 					
 					Color c = g.getColor();
@@ -348,7 +349,7 @@ MouseMotionListener {
 					}
 					
 					if (getKeys.z) {
-						setMenuMode(1);
+						setMenuMode(MenuMode.HELP.getMode());
 					}
 					
 					Color c = g.getColor();
@@ -368,7 +369,7 @@ MouseMotionListener {
 						getKeys.up = false;
 					}
 					if (getKeys.z) {
-						setMenuMode(2);
+						setMenuMode(MenuMode.EXIT.getMode());
 					}
 					
 					Color c = g.getColor();
@@ -384,7 +385,7 @@ MouseMotionListener {
 				}
 				
 			// 说明页面
-			} else if (menuMode == 1) {
+			} else if (menuMode == MenuMode.HELP.getMode()) {
 				ImageIcon imageicon = new ImageIcon(getClass().
 						getResource("/images/slpl00a.png"));
 				Image help1 = imageicon.getImage();
@@ -401,14 +402,14 @@ MouseMotionListener {
 				}
 				
 				if (getKeys.x) {
-					setMenuMode(0);
+					setMenuMode(MenuMode.MAIN_MENU.getMode());
 				}
 				
 			// 退出
-			} else if (menuMode == 2) {
+			} else if (menuMode == MenuMode.EXIT.getMode()) {
             	System.exit(0);
             // 死亡	
-            } else if (menuMode == 4) {
+            } else if (menuMode == MenuMode.DEFEAT.getMode()) {
 				ImageIcon imageicon = new ImageIcon(getClass().
 						getResource("/images/result.png"));
 				Image dead = imageicon.getImage();
@@ -425,7 +426,7 @@ MouseMotionListener {
 						getKeys.right = false;
 					}
 					if (getKeys.z) {
-						setMenuMode(5);
+						setMenuMode(MenuMode.CONTINUE.getMode());
 					}
 					
 					Color c = g.getColor();
@@ -451,7 +452,7 @@ MouseMotionListener {
 		            	bgm[2].stop();
 		            	bgm[7].stop();
 		            	time4 = -1;
-		            	setMenuMode(0);
+		            	setMenuMode(MenuMode.MAIN_MENU.getMode());
 					}
 					
 					Color c = g.getColor();
@@ -467,14 +468,14 @@ MouseMotionListener {
 				}
 				
 			// 继续
-			} else if (menuMode == 5) {
+			} else if (menuMode == MenuMode.CONTINUE.getMode()) {
 				bullets.allErase();
 				player.setLife(10);
 				player.setBoom(3);
-				menuMode = 3;
+				menuMode = MenuMode.LOADING.getMode();
 				isM = true;
 			// 胜利	
-			} else if (menuMode == 6) {
+			} else if (menuMode == MenuMode.THE_END.getMode()) {
 				ImageIcon imageicon = new ImageIcon(getClass().
 						getResource("/images/end03.jpg"));
 				Image ve = imageicon.getImage();
@@ -487,13 +488,13 @@ MouseMotionListener {
 					g.setColor(c);
 				}
 			// 暂停（方便截图用）
-			} else if (menuMode == 7) {
+			} else if (menuMode == MenuMode.PAUSE.getMode()) {
 				ImageIcon imageicon = new ImageIcon(getClass().
 						getResource("/images/pause.png"));
 				Image dead = imageicon.getImage();
 				g.drawImage(dead, 0, 0, 800, 900, 0, 0, 850, 1000, null);
 				if (getKeys.esc) {
-					setMenuMode(3);
+					setMenuMode(MenuMode.LOADING.getMode());
 					getKeys.esc = false;
 				}
 				
@@ -619,7 +620,7 @@ MouseMotionListener {
 
 			// 玩家死亡检测
 			if (!player.getExist()) {
-				setMenuMode(4);
+				setMenuMode(MenuMode.DEFEAT.getMode());
 			}
 		} while (true);
 	}
@@ -653,38 +654,38 @@ MouseMotionListener {
 	public void mousePressed(MouseEvent e) {
 		checkP = e.getPoint();
 		// 开始菜单
-		if (menuMode == 0) {
+		if (menuMode == MenuMode.MAIN_MENU.getMode()) {
 			// 开始游戏
 			if ((moveP.getX() >= 600 && moveP.getX() <= 800) &&
 					(moveP.getY() >= 400 && moveP.getY() <= 500)) {
 				gameSet();
-				setMenuMode(3);
+				setMenuMode(MenuMode.LOADING.getMode());
 			}
 			// 说明
 			if ((moveP.getX() >= 600 && moveP.getX() <= 800) &&
 					(moveP.getY() >= 530 && moveP.getY() <= 630)) {
-				setMenuMode(1);
+				setMenuMode(MenuMode.HELP.getMode());
 			}
 			// 退出
 			if ((moveP.getX() >= 600 && moveP.getX() <= 800) &&
 					(moveP.getY() >= 650 && moveP.getY() <= 750)) {
-				setMenuMode(2);
+				setMenuMode(MenuMode.EXIT.getMode());
 			}
 		} 
 		// 说明菜单
-		if (menuMode == 1) {
+		if (menuMode == MenuMode.HELP.getMode()) {
 			if ((moveP.getX() >= 705 && moveP.getX() <= 835) &&
 					(moveP.getY() >= 920 && moveP.getY() <= 1000)) {
-				setMenuMode(0);
+				setMenuMode(MenuMode.MAIN_MENU.getMode());
 			}
 		}
-		// 继续页面
-		if (menuMode == 4) {
+		// 失败页面
+		if (menuMode == MenuMode.DEFEAT.getMode()) {
 			// 继续
 			if ((moveP.getX() >= 20 && moveP.getX() <= 310) &&
 					(moveP.getY() >= 670 && moveP.getY() <= 850)) {
 				System.out.println("继续");
-				setMenuMode(5);
+				setMenuMode(MenuMode.CONTINUE.getMode());
 			}
 			// 回主菜单
             if ((moveP.getX() >= 350 && moveP.getX() <= 620) &&
@@ -695,14 +696,14 @@ MouseMotionListener {
             	bgm[2].stop();
             	bgm[7].stop();
             	time4 = -1;
-            	setMenuMode(0);
+            	setMenuMode(MenuMode.MAIN_MENU.getMode());
 			}
 		}
 		// 胜利页面
-		if (menuMode == 6) {
+		if (menuMode == MenuMode.THE_END.getMode()) {
         	if ((moveP.getX() >= 740 && moveP.getX() <= 815) &&
 					(moveP.getY() >= 200 && moveP.getY() <= 720)) {
-            	setMenuMode(0);
+            	setMenuMode(MenuMode.MAIN_MENU.getMode());
             	bgm[6].stop();
             	gameSet();
 			}

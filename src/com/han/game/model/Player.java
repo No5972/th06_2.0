@@ -3,6 +3,8 @@ package com.han.game.model;
 import java.awt.Graphics;
 
 import com.han.game.control.GetKeys;
+import com.han.game.enums.HitObject;
+import com.han.game.enums.MenuMode;
 
 /**
  * 自机主类
@@ -156,21 +158,20 @@ public class Player extends GameObject {
 			// 玩家被击中事件
 			if ((tmp = p.bullets.getObject(i)).getExist()) {
 				// 奖励事件
-				if (tmp.size == 5 || tmp.size == 6) {
+				if (tmp.size == HitObject.POWER.getSize() || tmp.size == HitObject.POINT.getSize()) {
 					if (25 > Math.hypot((px + 5) - (tmp.getPx() + tmp.getSize() / 2),
 							(py + 30) - (tmp.getPy() + tmp.getSize() / 2))) {
-						if (tmp.size == 5) {
+						if (tmp.size == HitObject.POWER.getSize()) { // 灵力
 							tmp.erase();
 							power++;
 							break;
-						} else {
+						} else { // 否则为 得点
 							tmp.erase();
 							score += 10;
 							break;
 						}
-
 					}
-				} else if (tmp.size == 8) {
+				} else if (tmp.size == HitObject.BOMB.getSize()) { // 投弹
 					if (25 > Math.hypot((px + 5) - (tmp.getPx() + tmp.getSize() / 2),
 							(py + 30) - (tmp.getPy() + tmp.getSize() / 2))) {
 						tmp.erase();
@@ -179,7 +180,7 @@ public class Player extends GameObject {
 						}
 						break;
 					}
-				} else if (tmp.size == 9) {
+				} else if (tmp.size == HitObject.LIFE.getSize()) { // 残机奖励
 					if (25 > Math.hypot((px + 5) - (tmp.getPx() + tmp.getSize() / 2),
 							(py + 30) - (tmp.getPy() + tmp.getSize() / 2))) {
 						tmp.erase();
@@ -188,27 +189,27 @@ public class Player extends GameObject {
 						}
 						break;
 					}
-					// 碰子弹
-				} else if (tmp.size == 32) {
+				// 碰子弹
+				} else if (tmp.size == HitObject.BOSS_SHOT_C.getSize()) { // 首领子弹C
 					if (32 > Math.hypot((px + 5) - (tmp.getPx() + tmp.getSize() / 2),
 							(py + 30) - (tmp.getPy() + tmp.getSize() / 2)) && p.isM == false) {
 						tmp.erase();
 						life--;
-						p.bgm[3].play();
+						p.bgm[3].play(); // 中弹音效
 						break;
 					}
-				} else {
+				} else { // 敌机子弹B
 					if (10 > Math.hypot((px + 5) - (tmp.getPx() + tmp.getSize() / 2),
 							(py + 30) - (tmp.getPy() + tmp.getSize() / 2)) && p.isM == false) {
 						tmp.erase();
 						life--;
-						p.bgm[3].play();
+						p.bgm[3].play(); // 中弹音效
 						break;
 					}
 				}
 
 				if (life < 0) {
-					p.setMenuMode(4);
+					p.setMenuMode(MenuMode.DEFEAT.getMode());
 					px = 312;
 					py = 539;
 					p.shoots.allErase();

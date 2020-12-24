@@ -2,6 +2,7 @@ package com.han.game.model;
 
 import java.awt.Graphics;
 
+import com.han.game.enums.HitObject;
 import com.han.game.main.GamePanel;
 
 /**
@@ -201,82 +202,82 @@ public class GameObject {
 //		}
 
 		// 奖励-火力
-		if (size == 5) {
+		if (size == HitObject.POWER.getSize()) {
 			g.drawImage(p.aImg, (int) px - 16, (int) py - 16, (int) px + 12,
 					(int) py + 14, 1, 1, 16, 16, null);
 		}
 		// 奖励-点数
-		if (size == 6) {
+		if (size == HitObject.POINT.getSize()) {
 			g.drawImage(p.aImg, (int) px - 16, (int) py - 16, (int) px + 12,
 					(int) py + 14, 16, 1, 31, 16, null);
 		}
 		// 奖励-Boom
-		if (size == 8) {
+		if (size == HitObject.BOMB.getSize()) {
 			g.drawImage(p.aImg, (int) px - 16, (int) py - 16, (int) px + 12,
 					(int) py + 14, 48, 0, 64, 16, null);
 		}
 		// 奖励-生命
-		if (size == 9) {
+		if (size == HitObject.LIFE.getSize()) {
 			g.drawImage(p.aImg, (int) px - 16, (int) py - 16, (int) px + 12,
 					(int) py + 14, 80, 0, 96, 16, null);
 		}
 
 		// 自机子弹1
-		if (size == 16) {
+		if (size == HitObject.PLAYER_SHOT_A.getSize()) {
 			g.drawImage(p.pImg, (int) px, (int) py - 20, (int) px + 15,
 					(int) py - 5, 129, 1, 144, 16, null);
 		}
 		
 		// 自机子弹2
-		if (size == 20) {
+		if (size == HitObject.PLAYER_SHOT_B.getSize()) {
 			g.drawImage(p.pImg, (int) px, (int) py - 20, (int) px + 15,
 					(int) py - 5, 145, 1, 160, 16, null);
 		}
 		
 		// 自机B弹
-		if (size == 101) {
+		if (size == HitObject.PLAYER_BOMB.getSize()) {
 			g.drawImage(p.boImg, (int) px - 260, (int) py - 300, (int) px + 260,
 					(int) py + 300, 0, 0, 256, 256, null);
 		}
 		
 		// 妖精子弹1
-		if (size == 15) {
+		if (size == HitObject.EMENY_SHOT_A.getSize()) {
 			g.drawImage(p.aImg, (int) px, (int) py - 20, (int) px + 15,
 					(int) py + 5, 18, 64, 30, 80, null);
 		}
 		
 		// 妖精子弹2
-		if (size == 23) {
+		if (size == HitObject.EMENY_SHOT_B.getSize()) {
 			g.drawImage(p.aImg, (int) px - 8, (int) py - 28, (int) px + 15,
 					(int) py - 5, 128, 32, 144, 48, null);
 		}
 		
 		// boss子弹1
-		if (size == 24) {
+		if (size == HitObject.BOSS_SHOT_A.getSize()) {
 			g.drawImage(p.aImg, (int) px - 8, (int) py - 28, (int) px + 15,
 					(int) py - 5, 160, 48, 176, 64, null);
 		}
 		
 		// boss子弹2
-		if (size == 25) {
+		if (size == HitObject.BOSS_SHOT_B.getSize()) {
 			g.drawImage(p.aImg, (int) px - 8, (int) py - 28, (int) px + 15,
 					(int) py - 5, 96, 48, 112, 64, null);
 		}
 		
 		// boss子弹3
-		if (size == 32) {
+		if (size == HitObject.BOSS_SHOT_C.getSize()) {
 			g.drawImage(p.eImg2, (int) px - 42, (int) py - 42, (int) px + 42,
 					(int) py + 42, 0, 0, 64, 64, null);
 		}
 		
 		// boss子弹3
-		if (size == 17) {
+		if (size == HitObject.BOSS_SHOT_D.getSize()) {
 			g.drawImage(p.aImg, (int) px - 8, (int) py - 16, (int) px + 8,
 					(int) py + 16, 72, 160, 88, 192, null);
 		}
 		
 		// boss子弹4
-		if (size == 26) {
+		if (size == HitObject.BOSS_SHOT_E.getSize()) {
 			int q = 16;
 			if (type == 1) {
 				g.drawImage(p.aImg, (int) px - 8, (int) py - 28, (int) px + 15,
@@ -295,7 +296,7 @@ public class GameObject {
 		}
 		
 		// boss子弹3
-		if (size == 18) {
+		if (size == HitObject.BOSS_SHOT_F.getSize()) {
 			g.drawImage(p.aImg, (int) px - 8, (int) py - 28, (int) px + 15,
 					(int) py - 5, 48, 48, 64, 64, null);
 		}
