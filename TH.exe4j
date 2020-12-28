@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exe4j version="7.0" transformSequenceNumber="3">
+  <directoryPresets config="D:/workspace/th06_2.0/classes/artifacts/TouHouProject_2_0_jar/jre/lib" />
+  <application name="東方赤魔鄉" distributionSourceDir="D:/workspace/th06_2.0/bin/exe" />
+  <executable name="東方赤魔鄉" wrapperType="embed" executableDir="." executableMode="gui" />
+  <java mainClass="com.han.game.main.Welcome" minVersion="1.8.0" maxVersion="14">
+    <searchSequence>
+      <registry />
+      <directory location="./jre" />
+    </searchSequence>
+    <classPath>
+      <archive location="D:/workspace/th06_2.0/classes/artifacts/TouHouProject_2_0_jar/TouHouProject_2.0.jar" failOnError="false" />
+    </classPath>
+  </java>
+</exe4j>
