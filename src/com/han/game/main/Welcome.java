@@ -17,7 +17,7 @@ public class Welcome {
 	 */
 	public static void main(String[] args) {
 		jf=new JFrame();
-		jf.setTitle("东方红魔乡");
+		jf.setTitle("東方赤魔鄉 v2.1");
 		jf.setDefaultCloseOperation(3);
 		jf.setResizable(false);
 		jf.setBounds((int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth()-640)/2,
