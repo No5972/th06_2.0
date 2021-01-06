@@ -85,6 +85,21 @@ public class ObjectsArray {
 				gameObject[i].erase();
 	}
 	
+	/**
+	 * 击败一个符时所有弹幕变为得点道具
+	 */
+	public void convertToPowerups() {
+		for (i = 0; i < arrayMax; i++)
+			if (gameObject[i].getSize() != HitObject.LIFE.getSize() &&
+					gameObject[i].getSize() != HitObject.BOMB.getSize() &&
+					gameObject[i].getSize() != HitObject.POINT.getSize() &&
+					gameObject[i].getSize() != HitObject.POWER.getSize()) {
+				gameObject[i].setSize(HitObject.POINT.getSize());
+				gameObject[i].setVx(0);
+				gameObject[i].setVy(5);
+			}
+	}
+	
 	// 返回空闲数组位
 	public GameObject getEmpty() {
 		for (i = 0; i < arrayMax; i++) {

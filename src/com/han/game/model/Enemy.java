@@ -1,5 +1,6 @@
 package com.han.game.model;
 
+import com.han.game.enums.HitObject;
 import com.han.game.enums.MenuMode;
 
 import java.awt.Graphics;
@@ -244,7 +245,7 @@ public class Enemy extends GameObject {
 				}
 				if (life > 0) {
 					life--;
-					p.player.setScore(1);
+					p.player.setScore(11);
 					tmp.erase();
 				}
 				if (life <= 0) {
@@ -256,13 +257,13 @@ public class Enemy extends GameObject {
 					if ((tmp = p.bullets.getEmpty()) != null) {
 						int temp = new Random().nextInt(40); // 生成0到40的随机数
 						if (temp < 10) {
-							tmp.setData(a, y, 0, 6, 5, 0, 0, 0, 'n');
+							tmp.setData(a, y, 0, -3, HitObject.POWER.getSize(), 0, 0, 0, 'n');
 						} else if (temp < 33) {
-							tmp.setData(a, y, 0, 5, 6, 0, 0, 0, 'n');
+							tmp.setData(a, y, 0, -4, HitObject.POINT.getSize(), 0, 0, 0, 'n');
 						} else if (temp < 38) {
-							tmp.setData(a, y, 0, 3, 8, 0, 0, 0, 'n');
+							tmp.setData(a, y, 0, -5, HitObject.BOMB.getSize(), 0, 0, 0, 'n');
 						} else {
-							tmp.setData(a, y, 0, 3, 9, 0, 0, 0, 'n');
+							tmp.setData(a, y, 0, -5, HitObject.LIFE.getSize(), 0, 0, 0, 'n');
 						}
 					}
 				}

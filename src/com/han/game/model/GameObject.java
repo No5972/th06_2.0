@@ -308,7 +308,15 @@ public class GameObject {
 		px += vx;
 		py += vy;
 		frame++;
-		if (px < -10 || py < 0 || px > 560 || py > 1000)
+		
+		if (this.size == HitObject.POWER.getSize() || 
+				this.size == HitObject.POINT.getSize() || 
+				this.size == HitObject.BOMB.getSize() || 
+				this.size == HitObject.LIFE.getSize()) {
+			this.setVy(this.getVy() + 0.1);
+		}
+		
+		if (px < -10 || py < -200 || px > 560 || py > 1000)
 			exist = false;
 	}
 	
@@ -356,4 +364,17 @@ public class GameObject {
 	public boolean getExist() {
 		return exist;
 	}
+
+	public void setSize(int size2) {
+		this.size = size2;
+	}
+	
+	public void setVx(double vx) {
+		this.vx = vx;
+	}
+
+	public void setVy(double vy) {
+		this.vy = vy;
+	}
+
 }

@@ -174,7 +174,7 @@ public class Player extends GameObject {
 						} else { // 否则为 得点
 							p.bgm[10].play();
 							tmp.erase();
-							score += 100;
+							score += 100 + ( this.py > 300 ? 1000 - this.py : 700 );
 							break;
 						}
 					}
@@ -308,6 +308,8 @@ public class Player extends GameObject {
 
 		 */
 		if (p.enemys.getObject(0).count == 5) {
+			System.out.println("stage1");
+			p.bullets.convertToPowerups();
 			p.bgm[4].play();
 			if ((tmp = p.boss.getEmpty()) != null) {
 				tmp.setData(p.enemys.getObject(0).px - 80, p.enemys.getObject(0).py + 10,
@@ -315,12 +317,16 @@ public class Player extends GameObject {
 			}
 		}
 		if (p.enemys.getObject(0).count == 50) {
+			System.out.println("stage2");
+			p.bullets.convertToPowerups();
 			p.bgm[4].play();
 			p.boss.allErase();
 			p.enemys.getObject(0).vx = 1;
 			p.enemys.getObject(0).vy = 1;
 		}
 		if (p.enemys.getObject(0).count == 105) {
+			System.out.println("stage3");
+			p.bullets.convertToPowerups();
 			p.bgm[4].play();
 			p.boss.allErase();
 			p.enemys.getObject(0).px = 280;
