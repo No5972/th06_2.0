@@ -232,36 +232,38 @@ public class Player extends GameObject {
 		for (Map.Entry<Integer, Map<String, List<int[]>>> k : constants.enemies.entrySet()) {// 遍历关卡敌人
 			switch (k.getKey()) {
 				case 1: // 第一关的敌人
-					for (Map.Entry<String, List<int[]>> k1 : k.getValue().entrySet()) { // 遍历敌人的出现位置范围
-						switch (k1.getKey()) { // 下标0 - 开始位置 下表1 - 结束位置
-							case "stg1AL":
-								for (int[] e : k1.getValue()) if (frame >= e[0] && frame < e[1]) stg1A_l();
-								break;
-							case "stg1AR":
-								for (int[] e : k1.getValue()) if (frame >= e[0] && frame < e[1]) stg1A_r();
-								break;
-							case "stg1ALX":
-								for (int[] e : k1.getValue()) if (frame >= e[0] && frame < e[1]) stg1A_lx();
-								break;
-							case "stg1ARX":
-								for (int[] e : k1.getValue()) if (frame >= e[0] && frame < e[1]) stg1A_rx();
-								break;
-							case "stg1B":
-								for (int[] e : k1.getValue()) if (frame >= e[0] && frame < e[1]) stg1B();
-								break;
-							case "stg1Boss":
-								for (int[] e : k1.getValue())
-									if (frame >= e[0] && frame < e[1]) {
-										p.setTime2(0);
-										p.bGM(2, 1);
-										System.out.println("boss");
-										p.enemys.allErase();
-										tmp = p.enemys.getObject(0);
-										tmp.setData(280, 200, 0, 0, 4, 0, 100, 1500, 'n');
-									}
-								break;
-							default:
-								break;
+					if (1 == k.getKey()) { // TODO: 前面改成当前关卡
+						for (Map.Entry<String, List<int[]>> k1 : k.getValue().entrySet()) { // 遍历敌人的出现位置范围
+							switch (k1.getKey()) { // 下标0 - 开始位置 下表1 - 结束位置
+								case "stg1AL":
+									for (int[] e : k1.getValue()) if (frame >= e[0] && frame < e[1]) stg1A_l();
+									break;
+								case "stg1AR":
+									for (int[] e : k1.getValue()) if (frame >= e[0] && frame < e[1]) stg1A_r();
+									break;
+								case "stg1ALX":
+									for (int[] e : k1.getValue()) if (frame >= e[0] && frame < e[1]) stg1A_lx();
+									break;
+								case "stg1ARX":
+									for (int[] e : k1.getValue()) if (frame >= e[0] && frame < e[1]) stg1A_rx();
+									break;
+								case "stg1B":
+									for (int[] e : k1.getValue()) if (frame >= e[0] && frame < e[1]) stg1B();
+									break;
+								case "stg1Boss":
+									for (int[] e : k1.getValue())
+										if (frame >= e[0] && frame < e[1]) {
+											p.setTime2(0);
+											p.bGM(2, 1);
+											System.out.println("boss");
+											p.enemys.allErase();
+											tmp = p.enemys.getObject(0);
+											tmp.setData(280, 200, 0, 0, 4, 0, 100, 1500, 'n');
+										}
+									break;
+								default:
+									break;
+							}
 						}
 					}
 					break;
