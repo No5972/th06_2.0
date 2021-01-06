@@ -6,9 +6,9 @@ import com.han.game.enums.HitObject;
 import com.han.game.main.GamePanel;
 
 /**
- * ËùÓĞµÄ¸¸Àà
+ * æ‰€æœ‰çš„çˆ¶ç±»
  * 
- * @author Ê®Æß
+ * @author åä¸ƒ
  *
  */
 public class GameObject {
@@ -47,15 +47,15 @@ public class GameObject {
 
 	/**
 	 * 
-	 * @param d  x×ø±ê
-	 * @param d1 y×ø±ê
-	 * @param d2 xÔöÁ¿
-	 * @param d3 yÔöÁ¿
-	 * @param i  ³ß´çÅĞ¶Ï»æÖÆÍ¼
-	 * @param j  Ö¡Êı
-	 * @param k  µĞÈË·ÖÊıÀàĞÍ
-	 * @param l  ÉúÃüÊı
-	 * @param m  ¶¯»­ÀàĞÍ
+	 * @param d  xåæ ‡
+	 * @param d1 yåæ ‡
+	 * @param d2 xå¢é‡
+	 * @param d3 yå¢é‡
+	 * @param i  å°ºå¯¸åˆ¤æ–­ç»˜åˆ¶å›¾
+	 * @param j  å¸§æ•°
+	 * @param k  æ•Œäººåˆ†æ•°ç±»å‹
+	 * @param l  ç”Ÿå‘½æ•°
+	 * @param m  åŠ¨ç”»ç±»å‹
 	 */
 	public void setData(double d, double d1, double d2, double d3,
 			int i, int j, int k, int l, char m) {
@@ -80,7 +80,7 @@ public class GameObject {
 			return;
 		}
 
-		// ×Ô»ú
+		// è‡ªæœº
 		if (size == 1) {
 			if (anim == 'n') {
 				if (p.timepaint == 1) {
@@ -137,7 +137,7 @@ public class GameObject {
 				}
 			}
 		}
-		// Ğ¡Ñı¾«
+		// å°å¦–ç²¾
 		if (size == 2) {
 			if (p.timepaint == 1) {
 				g.drawImage(p.eImg, (int) px - 16, (int) py - 16, (int) px + 16,
@@ -157,7 +157,7 @@ public class GameObject {
 			}
 			
 		}
-		// ´óÑı¾«
+		// å¤§å¦–ç²¾
 		if (size == 3) {
 			if (p.timepaint == 1) {
 				g.drawImage(p.eImg, (int) px - 20, (int) py - 20, (int) px + 20,
@@ -195,88 +195,88 @@ public class GameObject {
 			
 		}
 
-		// boss-·ÖÉí-ÀÙßäòùòğ
+		// boss-åˆ†èº«-è•¾å’ªè™è 
 //		if (size == 7) {
 //			g.drawImage(p.bImg, (int) px - 16, (int) py - 14, (int) px + 32,
 //					(int) py + 15, 1, 82, 65, 111, null);
 //		}
 
-		// ½±Àø-»ğÁ¦
+		// å¥–åŠ±-ç«åŠ›
 		if (size == HitObject.POWER.getSize()) {
 			g.drawImage(p.aImg, (int) px - 16, (int) py - 16, (int) px + 12,
 					(int) py + 14, 1, 1, 16, 16, null);
 		}
-		// ½±Àø-µãÊı
+		// å¥–åŠ±-ç‚¹æ•°
 		if (size == HitObject.POINT.getSize()) {
 			g.drawImage(p.aImg, (int) px - 16, (int) py - 16, (int) px + 12,
 					(int) py + 14, 16, 1, 31, 16, null);
 		}
-		// ½±Àø-Boom
+		// å¥–åŠ±-Boom
 		if (size == HitObject.BOMB.getSize()) {
 			g.drawImage(p.aImg, (int) px - 16, (int) py - 16, (int) px + 12,
 					(int) py + 14, 48, 0, 64, 16, null);
 		}
-		// ½±Àø-ÉúÃü
+		// å¥–åŠ±-ç”Ÿå‘½
 		if (size == HitObject.LIFE.getSize()) {
 			g.drawImage(p.aImg, (int) px - 16, (int) py - 16, (int) px + 12,
 					(int) py + 14, 80, 0, 96, 16, null);
 		}
 
-		// ×Ô»ú×Óµ¯1
+		// è‡ªæœºå­å¼¹1
 		if (size == HitObject.PLAYER_SHOT_A.getSize()) {
 			g.drawImage(p.pImg, (int) px, (int) py - 20, (int) px + 15,
 					(int) py - 5, 129, 1, 144, 16, null);
 		}
 		
-		// ×Ô»ú×Óµ¯2
+		// è‡ªæœºå­å¼¹2
 		if (size == HitObject.PLAYER_SHOT_B.getSize()) {
 			g.drawImage(p.pImg, (int) px, (int) py - 20, (int) px + 15,
 					(int) py - 5, 145, 1, 160, 16, null);
 		}
 		
-		// ×Ô»úBµ¯
+		// è‡ªæœºBå¼¹
 		if (size == HitObject.PLAYER_BOMB.getSize()) {
 			g.drawImage(p.boImg, (int) px - 260, (int) py - 300, (int) px + 260,
 					(int) py + 300, 0, 0, 256, 256, null);
 		}
 		
-		// Ñı¾«×Óµ¯1
+		// å¦–ç²¾å­å¼¹1
 		if (size == HitObject.EMENY_SHOT_A.getSize()) {
 			g.drawImage(p.aImg, (int) px, (int) py - 20, (int) px + 15,
 					(int) py + 5, 18, 64, 30, 80, null);
 		}
 		
-		// Ñı¾«×Óµ¯2
+		// å¦–ç²¾å­å¼¹2
 		if (size == HitObject.EMENY_SHOT_B.getSize()) {
 			g.drawImage(p.aImg, (int) px - 8, (int) py - 28, (int) px + 15,
 					(int) py - 5, 128, 32, 144, 48, null);
 		}
 		
-		// boss×Óµ¯1
+		// bosså­å¼¹1
 		if (size == HitObject.BOSS_SHOT_A.getSize()) {
 			g.drawImage(p.aImg, (int) px - 8, (int) py - 28, (int) px + 15,
 					(int) py - 5, 160, 48, 176, 64, null);
 		}
 		
-		// boss×Óµ¯2
+		// bosså­å¼¹2
 		if (size == HitObject.BOSS_SHOT_B.getSize()) {
 			g.drawImage(p.aImg, (int) px - 8, (int) py - 28, (int) px + 15,
 					(int) py - 5, 96, 48, 112, 64, null);
 		}
 		
-		// boss×Óµ¯3
+		// bosså­å¼¹3
 		if (size == HitObject.BOSS_SHOT_C.getSize()) {
 			g.drawImage(p.eImg2, (int) px - 42, (int) py - 42, (int) px + 42,
 					(int) py + 42, 0, 0, 64, 64, null);
 		}
 		
-		// boss×Óµ¯3
+		// bosså­å¼¹3
 		if (size == HitObject.BOSS_SHOT_D.getSize()) {
 			g.drawImage(p.aImg, (int) px - 8, (int) py - 16, (int) px + 8,
 					(int) py + 16, 72, 160, 88, 192, null);
 		}
 		
-		// boss×Óµ¯4
+		// bosså­å¼¹4
 		if (size == HitObject.BOSS_SHOT_E.getSize()) {
 			int q = 16;
 			if (type == 1) {
@@ -295,7 +295,7 @@ public class GameObject {
 			}
 		}
 		
-		// boss×Óµ¯3
+		// bosså­å¼¹3
 		if (size == HitObject.BOSS_SHOT_F.getSize()) {
 			g.drawImage(p.aImg, (int) px - 8, (int) py - 28, (int) px + 15,
 					(int) py - 5, 48, 48, 64, 64, null);

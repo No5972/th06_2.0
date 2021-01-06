@@ -10,21 +10,21 @@ import com.han.game.model.GameObject;
 import com.han.game.model.Shoot;
 
 /**
- * Êı×éÀà
+ * æ•°ç»„ç±»
  * 
- * @author Ê®Æß
+ * @author åä¸ƒ
  *
  */
 public class ObjectsArray {
-	// ¸¸Àà¶ÔÏó
+	// çˆ¶ç±»å¯¹è±¡
 	private GameObject gameObject[];
 	private int emptySearch;
-	// Êı×éÉÏÏŞ
+	// æ•°ç»„ä¸Šé™
 	private int arrayMax;
 	private int i;
 
 	/**
-	 * Çø·ÖÊı×é´æ·Å¶ÔÏó
+	 * åŒºåˆ†æ•°ç»„å­˜æ”¾å¯¹è±¡
 	 * 
 	 * @param s
 	 * @param j
@@ -66,7 +66,7 @@ public class ObjectsArray {
 	}
 
 	/**
-	 * ÒÆ³ıËùÓĞ
+	 * ç§»é™¤æ‰€æœ‰
 	 */
 	public void allErase() {
 		for (i = 0; i < arrayMax; i++)
@@ -74,7 +74,7 @@ public class ObjectsArray {
 	}
 	
 	/**
-	 * ÁÙÊ± - Ö»ÒÆ³ı×Óµ¯
+	 * ä¸´æ—¶ - åªç§»é™¤å­å¼¹
 	 */
 	public void eraseBullet() {
 		for (i = 0; i < arrayMax; i++)
@@ -85,19 +85,19 @@ public class ObjectsArray {
 				gameObject[i].erase();
 	}
 	
-	// ·µ»Ø¿ÕÏĞÊı×éÎ»
+	// è¿”å›ç©ºé—²æ•°ç»„ä½
 	public GameObject getEmpty() {
 		for (i = 0; i < arrayMax; i++) {
-			// Èç¹û¸ÃÊı×éÎ»Î´±»Õ¼ÓÃ
+			// å¦‚æœè¯¥æ•°ç»„ä½æœªè¢«å ç”¨
 			if (!gameObject[emptySearch].getExist()) {
-				// ´«»Ø¸ÃÊı×é
+				// ä¼ å›è¯¥æ•°ç»„
 				return gameObject[emptySearch];
 			}
-			// ÏÂ±ê+1
+			// ä¸‹æ ‡+1
 			emptySearch++;
-			// Èç¹ûÏÂ±ê³¬¹ı¹æ¶¨Êı×é
+			// å¦‚æœä¸‹æ ‡è¶…è¿‡è§„å®šæ•°ç»„
 			if (emptySearch >= arrayMax) {
-				// ·µ»ØµÚÁãÎ»Êı×é
+				// è¿”å›ç¬¬é›¶ä½æ•°ç»„
 				emptySearch = 0;
 			}
 		}

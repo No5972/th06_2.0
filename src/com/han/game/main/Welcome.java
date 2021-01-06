@@ -5,8 +5,8 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 /**
- * Ö÷¿ò¼Ü
- * @author Ê®Æß
+ * ä¸»æ¡†æ¶
+ * @author åä¸ƒ
  *
  */
 public class Welcome {
@@ -17,7 +17,7 @@ public class Welcome {
 	 */
 	public static void main(String[] args) {
 		jf=new JFrame();
-		jf.setTitle("¶«·½ºìÄ§Ïç");
+		jf.setTitle("ä¸œæ–¹çº¢é­”ä¹¡");
 		jf.setDefaultCloseOperation(3);
 		jf.setResizable(false);
 		jf.setBounds((int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth()-640)/2,

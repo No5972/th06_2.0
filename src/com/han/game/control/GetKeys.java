@@ -2,8 +2,8 @@ package com.han.game.control;
 
 
 /**
- * °´¼üÀà
- * @author Ê®Æß
+ * æŒ‰é”®ç±»
+ * @author åä¸ƒ
  *
  */
 public class GetKeys {

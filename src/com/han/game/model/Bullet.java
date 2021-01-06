@@ -3,8 +3,8 @@ package com.han.game.model;
 import java.awt.Graphics;
 
 /**
- * @author Ê®Æß
- *µĞÈË×Óµ¯Àà
+ * @author åä¸ƒ
+ *æ•Œäººå­å¼¹ç±»
  */
 public class Bullet extends GameObject {
 	public Bullet() {

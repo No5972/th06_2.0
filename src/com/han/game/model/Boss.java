@@ -3,8 +3,8 @@ package com.han.game.model;
 import java.awt.Graphics;
 
 /**
- * boss二阶段弹幕对象类
- * @author 十七
+ * boss浜岄樁娈靛脊骞曞璞＄被
+ * @author 鍗佷竷
  *
  */
 public class Boss extends GameObject {

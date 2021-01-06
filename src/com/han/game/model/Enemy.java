@@ -7,13 +7,13 @@ import java.util.Random;
 
 
 /**
- * µĞÈËÖ÷Àà
+ * æ•Œäººä¸»ç±»
  * 
- * @author Ê®Æß
+ * @author åä¸ƒ
  *
  */
 public class Enemy extends GameObject {
-	// µ¯Ä»Æ«ÒÆÁ¿
+	// å¼¹å¹•åç§»é‡
 	double c0;
 	
 	private int a;
@@ -37,7 +37,7 @@ public class Enemy extends GameObject {
 			return;
 		}
 		super.move();
-		// ·ÖÊı2µÄÑı¾«
+		// åˆ†æ•°2çš„å¦–ç²¾
 		if (type == 2) {
 			if (frame % 30 == 0) {
 				th = playerTh();
@@ -46,7 +46,7 @@ public class Enemy extends GameObject {
 				}
 			}
 		}
-		// ·ÖÊı3µÄÑı¾«
+		// åˆ†æ•°3çš„å¦–ç²¾
 		if (type == 3) {
 			if (py > 450 || frame > 2800) {
 				vx = -10;
@@ -64,7 +64,7 @@ public class Enemy extends GameObject {
 		
 
 		
-		// ·ÖÊı100µÄboss
+		// åˆ†æ•°100çš„boss
 		if (type == 100) {
 			if (p.getTime3() > 14) {
 				p.setTime3(0);
@@ -220,7 +220,7 @@ public class Enemy extends GameObject {
 			
 			
 		}
-		// ÎĞÂÖµ¯Ä»
+		// æ¶¡è½®å¼¹å¹•
 		if (p.boss.getObject(0).type == 2) {
 			if (frame % 8 == 0) {
 				c0 = Math.random() * 30;
@@ -235,7 +235,7 @@ public class Enemy extends GameObject {
 			}
 		}
 
-		// ×Ô»ú×Óµ¯×²»÷µĞÈË
+		// è‡ªæœºå­å¼¹æ’å‡»æ•Œäºº
 		for (int i = 0; i < p.shoots.getArrayMax(); i++) {
 			if (isM == false) {
 				if (!(tmp = p.shoots.getObject(i)).getExist() || Math.hypot(px - tmp.getPx(),
@@ -254,7 +254,7 @@ public class Enemy extends GameObject {
 					p.bgm[9].play();
 					erase();
 					if ((tmp = p.bullets.getEmpty()) != null) {
-						int temp = new Random().nextInt(40); // Éú³É0µ½40µÄËæ»úÊı
+						int temp = new Random().nextInt(40); // ç”Ÿæˆ0åˆ°40çš„éšæœºæ•°
 						if (temp < 10) {
 							tmp.setData(a, y, 0, 6, 5, 0, 0, 0, 'n');
 						} else if (temp < 33) {
@@ -279,7 +279,7 @@ public class Enemy extends GameObject {
 		
 		if (p.player.frame > 3300) {
 			if (life <= 0) {
-				System.out.println("Ö´ĞĞ");
+				System.out.println("æ‰§è¡Œ");
 				p.setMenuMode(MenuMode.THE_END.getMode());
 				p.setTime2(0);
 				p.bGM(6, 2);
@@ -295,7 +295,7 @@ public class Enemy extends GameObject {
 	}
 
 	/**
-	 * ¸ú×ÙÍæ¼Ò×ø±ê
+	 * è·Ÿè¸ªç©å®¶åæ ‡
 	 * 
 	 * @return
 	 */
