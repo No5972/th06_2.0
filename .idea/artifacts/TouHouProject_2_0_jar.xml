@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TouHouProject_2.0:jar">
+    <output-path>$PROJECT_DIR$/classes/artifacts/TouHouProject_2_0_jar</output-path>
+    <root id="archive" name="TouHouProject_2.0.jar">
+      <element id="module-output" name="TouHouProject_2.0" />
+    </root>
+  </artifact>
+</component>

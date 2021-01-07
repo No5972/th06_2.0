@@ -2,11 +2,7 @@ package com.han.game.main;
 
 import java.applet.Applet;
 import java.applet.AudioClip;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -35,7 +31,7 @@ MouseMotionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Graphics g;
+	private Graphics2D g;
 	private Image dbImage;
 	private Thread gameLoop;
 	private GetKeys getKeys;
@@ -232,7 +228,8 @@ MouseMotionListener {
 			dbImage = createImage(850, 1000);
 			if (dbImage == null)
 				return;
-			g = dbImage.getGraphics();
+			g = (Graphics2D) dbImage.getGraphics();
+			g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		}
 
 		// 背景叠加循环
@@ -545,7 +542,7 @@ MouseMotionListener {
 	 * 
 	 * @param g 画分，画火力，B弹
 	 */
-	public void paintScore(Graphics g) {
+	public void paintScore(Graphics2D g) {
 		g.setColor(new Color(0xFF0000));
 		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
 		g.drawString("SCORE: " + player.getScore(), 600, 200);

@@ -3,14 +3,14 @@ package com.han.game.consts;
 import java.util.*;
 
 /**
- * ±¾×÷µØÍ¼Êı¾İ
+ * æœ¬ä½œåœ°å›¾æ•°æ®
  */
 public class Constants {
-    public Map<Integer, Map<String, List<int[]>>> enemies = new HashMap<>(); // ¹Ø¿¨ - ¹Ø¿¨µÄµĞÈË
+    public Map<Integer, Map<String, List<int[]>>> enemies = new HashMap<>(); // å…³å¡ - å…³å¡çš„æ•Œäºº
 
     public Constants() {
         Map<String, List<int[]>> stg1 = new HashMap<>();
-        stg1.put("stg1AL", Arrays.asList(new int[]{0,360}, new int[]{1300,1500})); // µĞÈËÖÖÀà£¨·½·¨ÖĞÎªÑ­»·Èô¸É´Î³öÏÖ£© - ³öÏÖ·¶Î§
+        stg1.put("stg1AL", Arrays.asList(new int[]{0,360}, new int[]{1300,1500})); // æ•Œäººç§ç±»ï¼ˆæ–¹æ³•ä¸­ä¸ºå¾ªç¯è‹¥å¹²æ¬¡å‡ºç°ï¼‰ - å‡ºç°èŒƒå›´
         stg1.put("stg1AR", Arrays.asList(new int[]{360,660}, new int[]{1500,1800}));
         stg1.put("stg1ALX", Arrays.asList(new int[]{700,1000}, new int[]{1800,2500}));
         stg1.put("stg1ARX", Arrays.asList(new int[]{700,1000}, new int[]{1800,2500}));
