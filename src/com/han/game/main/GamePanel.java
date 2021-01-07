@@ -484,8 +484,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 						getResource("/images/end03.jpg"));
 				Image ve = imageicon.getImage();
 				g.drawImage(ve, 0, 0, 850, 1000, 0, 0, 640, 480, null);
-				this.drawStringEx(g, "終 わ り", 350, 20, Color.BLACK, 0.7F);
-				this.drawStringEx(g, "最终得点：" + player.getScore(), 300, 40, Color.BLACK, 0.7F);
+				Font previousFont = g.getFont();
+				g.setFont(new Font("KaiTi", Font.BOLD, 36));
+				this.drawStringEx(g, "終 わ り", 300, 20, Color.WHITE, 0.7F);
+				this.drawStringEx(g, "最终得点：" + player.getScore(), 200, 60, Color.WHITE, 0.7F);
+				g.setFont(previousFont);
 				if ((moveP.getX() >= 740 && moveP.getX() <= 815) &&
 						(moveP.getY() >= 200 && moveP.getY() <= 720)) {
 					Color c = g.getColor();
@@ -507,8 +510,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 			}
 		}
 
+		Font previousFont = g.getFont();
 		fpsMaker.makeFPS();
+		g.setFont(new Font("KaiTi", Font.BOLD, 20));
 		this.drawStringEx(g, "FPS: " + fpsMaker.getFPS(), 740, 940, Color.WHITE, 0.7F);
+		g.setFont(previousFont);
 	}
 
 
@@ -552,20 +558,20 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	public void paintScore(Graphics2D g) {
 		g.setColor(new Color(0xFF0000));
 		g.setFont(new Font("KaiTi", Font.BOLD, 20));
-		this.drawStringEx(g, "SCORE: " + player.getScore(), 600, 200, Color.BLACK, 0.7F);
-		this.drawStringEx(g, "POWER: " + player.getPower(), 600, 300, Color.BLACK, 0.7F);
-		this.drawStringEx(g, "BOMB: " + player.getBoom(), 600, 400, Color.BLACK, 0.7F);
+		this.drawStringEx(g, "SCORE: " + player.getScore(), 600, 200, Color.WHITE, 0.5F);
+		this.drawStringEx(g, "POWER: " + player.getPower(), 600, 300, Color.WHITE, 0.5F);
+		this.drawStringEx(g, "BOMB: " + player.getBoom(), 600, 400, Color.WHITE, 0.5F);
 		// g.drawStringEx("现在可以按键暂停：ESC", 580, 700);
-		this.drawStringEx(g, "现在可以按键暂停：ESC", 580, 700, Color.BLACK, 0.7F);
-		this.drawStringEx(g, "现在可以按键无敌：SPACE", 580, 750, Color.BLACK, 0.7F);
+		this.drawStringEx(g, "现在可以按键暂停：ESC", 580, 700, Color.WHITE, 0.5F);
+		this.drawStringEx(g, "现在可以按键无敌：SPACE", 580, 750, Color.WHITE, 0.5F);
 
 		if (time4 == 20) {
 			bgm[7].loop();
 		}
 		if (time4 >= 0) {
 			g.setColor(new Color(0xFF0000));
-			g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
-			this.drawStringEx(g, "倒计时: " + time4, 600, 500, Color.BLACK, 0.7F);
+			g.setFont(new Font("KaiTi", Font.BOLD, 40));
+			this.drawStringEx(g, "倒计时: " + time4, 600, 500, Color.WHITE, 0.7F);
 		}
 
 

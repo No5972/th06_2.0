@@ -165,7 +165,7 @@ public class Player extends GameObject {
 				// 奖励事件
 				if (tmp.size == HitObject.POWER.getSize() || tmp.size == HitObject.POINT.getSize()) {
 					if (25 > Math.hypot((px + 5) - (tmp.getPx() + tmp.getSize() / 2),
-							(py + 30) - (tmp.getPy() + tmp.getSize() / 2))) {
+							(py + 15) - (tmp.getPy() + tmp.getSize() / 2))) {
 						if (tmp.size == HitObject.POWER.getSize()) { // 灵力
 							p.bgm[10].play();
 							tmp.erase();
@@ -180,7 +180,7 @@ public class Player extends GameObject {
 					}
 				} else if (tmp.size == HitObject.BOMB.getSize()) { // 投弹
 					if (25 > Math.hypot((px + 5) - (tmp.getPx() + tmp.getSize() / 2),
-							(py + 30) - (tmp.getPy() + tmp.getSize() / 2))) {
+							(py + 15) - (tmp.getPy() + tmp.getSize() / 2))) {
 						tmp.erase();
 						p.bgm[10].play();
 						if (boom < 10) {
@@ -190,7 +190,7 @@ public class Player extends GameObject {
 					}
 				} else if (tmp.size == HitObject.LIFE.getSize()) { // 残机奖励
 					if (25 > Math.hypot((px + 5) - (tmp.getPx() + tmp.getSize() / 2),
-							(py + 30) - (tmp.getPy() + tmp.getSize() / 2))) {
+							(py + 15) - (tmp.getPy() + tmp.getSize() / 2))) {
 						tmp.erase();
 						p.bgm[10].play();
 						if (life < 10) {
@@ -201,7 +201,7 @@ public class Player extends GameObject {
 				// 碰子弹
 				} else if (tmp.size == HitObject.BOSS_SHOT_C.getSize()) { // 首领子弹C
 					if (32 > Math.hypot((px + 5) - (tmp.getPx() + tmp.getSize() / 2),
-							(py + 30) - (tmp.getPy() + tmp.getSize() / 2)) && p.isM == false) {
+							(py + 15) - (tmp.getPy() + tmp.getSize() / 2)) && p.isM == false) {
 						tmp.erase();
 						life--;
 						p.bgm[3].play(); // 中弹音效
@@ -209,7 +209,7 @@ public class Player extends GameObject {
 					}
 				} else { // 敌机子弹B
 					if (10 > Math.hypot((px + 5) - (tmp.getPx() + tmp.getSize() / 2),
-							(py + 30) - (tmp.getPy() + tmp.getSize() / 2)) && p.isM == false) {
+							(py + 15) - (tmp.getPy() + tmp.getSize() / 2)) && p.isM == false) {
 						tmp.erase();
 						life--;
 						p.bgm[3].play(); // 中弹音效

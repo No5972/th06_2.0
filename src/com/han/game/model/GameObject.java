@@ -140,7 +140,9 @@ public class GameObject {
 			// 判定点
 			Color previousColor = g.getColor();
 			g.setColor(Color.white);
-			g.fillOval(new Double(px + 3).intValue(), new Double(py + 28).intValue() , 4, 4);
+			g.fillOval(new Double(px + 3).intValue(), new Double(py + 13).intValue() , 4, 4);
+			g.setColor(Color.red);
+			g.drawOval(new Double(px + 2).intValue(), new Double(py + 12).intValue() , 6, 6);
 			g.setColor(previousColor);
 		}
 		// 小妖精
