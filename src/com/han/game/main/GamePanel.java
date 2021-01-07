@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.font.GlyphVector;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -25,12 +26,12 @@ import com.han.game.model.Player;
  *
  */
 public class GamePanel extends JPanel implements Runnable, KeyListener, MouseListener,
-MouseMotionListener {
+		MouseMotionListener {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private Graphics2D g;
 	private Image dbImage;
 	private Thread gameLoop;
@@ -40,7 +41,7 @@ MouseMotionListener {
 	private int time2;
 	private int time3;
 	private int time4;
-	
+
 	/**
 	 * 0：菜单
 	 * 1：说明
@@ -91,7 +92,7 @@ MouseMotionListener {
 		time3 = 0;
 		time4 = -1;
 		timepaint = 1;
-		
+
 
 		// 背景
 		ImageIcon imageicon1 = new ImageIcon(getClass().getResource("/images/bg.png"));
@@ -115,22 +116,22 @@ MouseMotionListener {
 
 		ImageIcon imageicon8 = new ImageIcon(getClass().getResource("/images/boom.png"));
 		boImg = imageicon8.getImage();
-		
+
 		ImageIcon imageicon9 = new ImageIcon(getClass().getResource("/images/timg.jpg"));
 		iconImg = imageicon9.getImage();
-		
+
 		// 音乐
-	    bgm[0]=Applet.newAudioClip(getClass().getResource("/sounds/th06_01.wav"));
-	    bgm[1]=Applet.newAudioClip(getClass().getResource("/sounds/th06_02.wav"));
-	    bgm[2]=Applet.newAudioClip(getClass().getResource("/sounds/th06_13.wav"));
-	    bgm[3]=Applet.newAudioClip(getClass().getResource("/sounds/biubiu.mp3"));
-	    bgm[4]=Applet.newAudioClip(getClass().getResource("/sounds/break.wav"));
-	    bgm[5]=Applet.newAudioClip(getClass().getResource("/sounds/skill.wav"));
-	    bgm[6]=Applet.newAudioClip(getClass().getResource("/sounds/th06_17.wav"));
-	    bgm[7]=Applet.newAudioClip(getClass().getResource("/sounds/don00.wav"));
-	    bgm[8]=Applet.newAudioClip(getClass().getResource("/sounds/se_plst00.wav")); // 攻击
-	    bgm[9]=Applet.newAudioClip(getClass().getResource("/sounds/se_slash.wav")); // 小怪被毁
-	    bgm[10]=Applet.newAudioClip(getClass().getResource("/sounds/se_item00.wav")); // 拾取道具
+		bgm[0]=Applet.newAudioClip(getClass().getResource("/sounds/th06_01.wav"));
+		bgm[1]=Applet.newAudioClip(getClass().getResource("/sounds/th06_02.wav"));
+		bgm[2]=Applet.newAudioClip(getClass().getResource("/sounds/th06_13.wav"));
+		bgm[3]=Applet.newAudioClip(getClass().getResource("/sounds/biubiu.mp3"));
+		bgm[4]=Applet.newAudioClip(getClass().getResource("/sounds/break.wav"));
+		bgm[5]=Applet.newAudioClip(getClass().getResource("/sounds/skill.wav"));
+		bgm[6]=Applet.newAudioClip(getClass().getResource("/sounds/th06_17.wav"));
+		bgm[7]=Applet.newAudioClip(getClass().getResource("/sounds/don00.wav"));
+		bgm[8]=Applet.newAudioClip(getClass().getResource("/sounds/se_plst00.wav")); // 攻击
+		bgm[9]=Applet.newAudioClip(getClass().getResource("/sounds/se_slash.wav")); // 小怪被毁
+		bgm[10]=Applet.newAudioClip(getClass().getResource("/sounds/se_item00.wav")); // 拾取道具
 
 		// 开启焦点-按键
 		setFocusable(true);
@@ -143,9 +144,9 @@ MouseMotionListener {
 		GameObject.gameObjectInit(this);
 		gameLoop = new Thread(this);
 		gameLoop.start();
-		
+
 		new TimeThread().start();
-		
+
 		/**
 		 * 添加动画定时器
 		 * 2020-05-21 15:30:28
@@ -160,7 +161,7 @@ MouseMotionListener {
 //				System.out.println(timepaint);
 			}
 		}, 1000, 140);
-		
+
 	}
 
 	public int getTime() {
@@ -170,7 +171,7 @@ MouseMotionListener {
 	public void setTime(int time) {
 		this.time = time;
 	}
-	
+
 	public int getTime3() {
 		return time3;
 	}
@@ -178,7 +179,7 @@ MouseMotionListener {
 	public void setTime3(int time3) {
 		this.time3 = time3;
 	}
-	
+
 	public int getTime4() {
 		return time4;
 	}
@@ -215,7 +216,7 @@ MouseMotionListener {
 				setMenuMode(MenuMode.PAUSE.getMode());
 				getKeys.esc = false;
 			}
-			
+
 		}
 	}
 
@@ -244,7 +245,7 @@ MouseMotionListener {
 		enemys.allDraw(g);
 		bullets.allDraw(g);
 		boss.allDraw(g);
-		
+
 		if (isM) {
 			ImageIcon imageicon = new ImageIcon(getClass().getResource("/images/stg7enm.png"));
 			Image dun = imageicon.getImage();
@@ -278,11 +279,11 @@ MouseMotionListener {
 		g.setColor(Color.red);
 		g.drawRect(600, 600, 200, 10);
 		g.fillRect(600, 600, player.getLife() * 20, 11);
-		
+
 
 		// 分数和火力
 		paintScore(g);
-		
+
 		if (menuMode != MenuMode.LOADING.getMode()) {
 			if (menuMode == MenuMode.MAIN_MENU.getMode()) { // 主菜单
 				bGM(0, 1);
@@ -330,7 +331,7 @@ MouseMotionListener {
 					if (getKeys.z) {
 						setMenuMode(MenuMode.LOADING.getMode());
 					}
-					
+
 					Color c = g.getColor();
 					g.setColor(Color.white);
 					g.drawRect(600, 400, 200, 100);
@@ -347,11 +348,11 @@ MouseMotionListener {
 						moveP.setLocation(700, 450);
 						getKeys.up = false;
 					}
-					
+
 					if (getKeys.z) {
 						setMenuMode(MenuMode.HELP.getMode());
 					}
-					
+
 					Color c = g.getColor();
 					g.setColor(Color.yellow);
 					g.drawRect(600, 530, 200, 100);
@@ -371,20 +372,20 @@ MouseMotionListener {
 					if (getKeys.z) {
 						setMenuMode(MenuMode.EXIT.getMode());
 					}
-					
+
 					Color c = g.getColor();
 					g.setColor(Color.pink);
 					g.drawRect(600, 650, 200, 100);
 					g.setColor(c);
 				}
-				
+
 				if (getKeys.down || getKeys.up) {
 					moveP.setLocation(700, 450);
 					getKeys.down = false;
 					getKeys.up = false;
 				}
-				
-			// 说明页面
+
+				// 说明页面
 			} else if (menuMode == MenuMode.HELP.getMode()) {
 				ImageIcon imageicon = new ImageIcon(getClass().
 						getResource("/images/slpl00a.png"));
@@ -400,23 +401,23 @@ MouseMotionListener {
 					g.drawRect(705, 920, 130, 990);
 					g.setColor(c);
 				}
-				
+
 				if (getKeys.x) {
 					setMenuMode(MenuMode.MAIN_MENU.getMode());
 				}
-				
-			// 退出
+
+				// 退出
 			} else if (menuMode == MenuMode.EXIT.getMode()) {
-            	System.exit(0);
-            // 死亡	
-            } else if (menuMode == MenuMode.DEFEAT.getMode()) {
+				System.exit(0);
+				// 死亡
+			} else if (menuMode == MenuMode.DEFEAT.getMode()) {
 				ImageIcon imageicon = new ImageIcon(getClass().
 						getResource("/images/result.png"));
 				Image dead = imageicon.getImage();
 				g.drawImage(dead, 0, 0, 850, 1000, 0, 0, 640, 480, null);
 				if ((moveP.getX() >= 20 && moveP.getX() <= 310) &&
 						(moveP.getY() >= 670 && moveP.getY() <= 850)) {
-					
+
 					if (getKeys.left) {
 						moveP.setLocation(430, 720);
 						getKeys.left = false;
@@ -428,7 +429,7 @@ MouseMotionListener {
 					if (getKeys.z) {
 						setMenuMode(MenuMode.CONTINUE.getMode());
 					}
-					
+
 					Color c = g.getColor();
 					g.setColor(Color.red);
 					g.drawRect(20, 670, 310, 180);
@@ -436,7 +437,7 @@ MouseMotionListener {
 				}
 				if ((moveP.getX() >= 350 && moveP.getX() <= 620) &&
 						(moveP.getY() >= 670 && moveP.getY() <= 850)) {
-					
+
 					if (getKeys.left) {
 						moveP.setLocation(100, 720);
 						getKeys.left = false;
@@ -447,41 +448,41 @@ MouseMotionListener {
 					}
 					if (getKeys.z) {
 						player.erase();
-		            	gameSet();
-		            	bgm[1].stop();
-		            	bgm[2].stop();
-		            	bgm[7].stop();
-		            	time4 = -1;
-		            	setMenuMode(MenuMode.MAIN_MENU.getMode());
+						gameSet();
+						bgm[1].stop();
+						bgm[2].stop();
+						bgm[7].stop();
+						time4 = -1;
+						setMenuMode(MenuMode.MAIN_MENU.getMode());
 					}
-					
+
 					Color c = g.getColor();
 					g.setColor(Color.green);
 					g.drawRect(350, 670, 270, 180);
 					g.setColor(c);
 				}
-				
+
 				if (getKeys.left || getKeys.right) {
 					moveP.setLocation(100, 720);
 					getKeys.left = false;
 					getKeys.right = false;
 				}
-				
-			// 继续
+
+				// 继续
 			} else if (menuMode == MenuMode.CONTINUE.getMode()) {
 				bullets.allErase();
 				player.setLife(10);
 				player.setBoom(3);
 				menuMode = MenuMode.LOADING.getMode();
 				isM = true;
-			// 胜利	
+				// 胜利
 			} else if (menuMode == MenuMode.THE_END.getMode()) {
 				ImageIcon imageicon = new ImageIcon(getClass().
 						getResource("/images/end03.jpg"));
 				Image ve = imageicon.getImage();
 				g.drawImage(ve, 0, 0, 850, 1000, 0, 0, 640, 480, null);
-				g.drawString("終 わ り", 350, 20);
-				g.drawString("最终得点：" + player.getScore(), 300, 40);
+				this.drawStringEx(g, "終 わ り", 350, 20, Color.BLACK, 0.7F);
+				this.drawStringEx(g, "最终得点：" + player.getScore(), 300, 40, Color.BLACK, 0.7F);
 				if ((moveP.getX() >= 740 && moveP.getX() <= 815) &&
 						(moveP.getY() >= 200 && moveP.getY() <= 720)) {
 					Color c = g.getColor();
@@ -489,7 +490,7 @@ MouseMotionListener {
 					g.drawRect(740, 200, 75, 520);
 					g.setColor(c);
 				}
-			// 暂停（方便截图用）
+				// 暂停（方便截图用）
 			} else if (menuMode == MenuMode.PAUSE.getMode()) {
 				ImageIcon imageicon = new ImageIcon(getClass().
 						getResource("/images/pause.png"));
@@ -499,14 +500,14 @@ MouseMotionListener {
 					setMenuMode(MenuMode.LOADING.getMode());
 					getKeys.esc = false;
 				}
-				
+
 			}
 		}
 	}
-	
-	
 
-	
+
+
+
 	public void setTime2(int time2) {
 		this.time2 = time2;
 	}
@@ -529,7 +530,7 @@ MouseMotionListener {
 		}
 		bgm[j].stop();
 	}
-	
+
 	/**
 	 * 加载选项模块
 	 * @param i
@@ -537,31 +538,32 @@ MouseMotionListener {
 	public void setMenuMode(int i) {
 		menuMode = i;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param g 画分，画火力，B弹
 	 */
 	public void paintScore(Graphics2D g) {
 		g.setColor(new Color(0xFF0000));
-		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
-		g.drawString("SCORE: " + player.getScore(), 600, 200);
-		g.drawString("POWER: " + player.getPower(), 600, 300);
-		g.drawString("BOMB: " + player.getBoom(), 600, 400);
-		g.drawString("现在可以按键暂停：ESC", 580, 700);
-		g.drawString("现在可以按键无敌：SPACE", 580, 750);
-		
+		g.setFont(new Font("KaiTi", Font.BOLD, 20));
+		this.drawStringEx(g, "SCORE: " + player.getScore(), 600, 200, Color.BLACK, 0.7F);
+		this.drawStringEx(g, "POWER: " + player.getPower(), 600, 300, Color.BLACK, 0.7F);
+		this.drawStringEx(g, "BOMB: " + player.getBoom(), 600, 400, Color.BLACK, 0.7F);
+		// g.drawStringEx("现在可以按键暂停：ESC", 580, 700);
+		this.drawStringEx(g, "现在可以按键暂停：ESC", 580, 700, Color.BLACK, 0.7F);
+		this.drawStringEx(g, "现在可以按键无敌：SPACE", 580, 750, Color.BLACK, 0.7F);
+
 		if (time4 == 20) {
 			bgm[7].loop();
 		}
 		if (time4 >= 0) {
 			g.setColor(new Color(0xFF0000));
 			g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
-			g.drawString("倒计时: " + time4, 600, 500);
+			this.drawStringEx(g, "倒计时: " + time4, 600, 500, Color.BLACK, 0.7F);
 		}
-	
-		
-		
+
+
+
 	}
 
 	/**
@@ -573,7 +575,7 @@ MouseMotionListener {
 			g.drawImage(dbImage, 0, 0, null);
 	}
 
-	
+
 	/**
 	 * 时间线程控制，间隔1s
 	 * @author 十七
@@ -599,7 +601,7 @@ MouseMotionListener {
 			}
 		}
 	}
-	
+
 	/**
 	 * 线程20毫秒
 	 */
@@ -611,8 +613,8 @@ MouseMotionListener {
 			gameUpdate();
 			gameRender();
 			paintScreen();
-			
-			
+
+
 			// 屏幕睡眠
 			try {
 				Thread.sleep(20);
@@ -673,7 +675,7 @@ MouseMotionListener {
 					(moveP.getY() >= 650 && moveP.getY() <= 750)) {
 				setMenuMode(MenuMode.EXIT.getMode());
 			}
-		} 
+		}
 		// 说明菜单
 		if (menuMode == MenuMode.HELP.getMode()) {
 			if ((moveP.getX() >= 705 && moveP.getX() <= 835) &&
@@ -690,26 +692,46 @@ MouseMotionListener {
 				setMenuMode(MenuMode.CONTINUE.getMode());
 			}
 			// 回主菜单
-            if ((moveP.getX() >= 350 && moveP.getX() <= 620) &&
+			if ((moveP.getX() >= 350 && moveP.getX() <= 620) &&
 					(moveP.getY() >= 670 && moveP.getY() <= 850)) {
-            	player.erase();
-            	gameSet();
-            	bgm[1].stop();
-            	bgm[2].stop();
-            	bgm[7].stop();
-            	time4 = -1;
-            	setMenuMode(MenuMode.MAIN_MENU.getMode());
+				player.erase();
+				gameSet();
+				bgm[1].stop();
+				bgm[2].stop();
+				bgm[7].stop();
+				time4 = -1;
+				setMenuMode(MenuMode.MAIN_MENU.getMode());
 			}
 		}
 		// 胜利页面
 		if (menuMode == MenuMode.THE_END.getMode()) {
-        	if ((moveP.getX() >= 740 && moveP.getX() <= 815) &&
+			if ((moveP.getX() >= 740 && moveP.getX() <= 815) &&
 					(moveP.getY() >= 200 && moveP.getY() <= 720)) {
-            	setMenuMode(MenuMode.MAIN_MENU.getMode());
-            	bgm[6].stop();
-            	gameSet();
+				setMenuMode(MenuMode.MAIN_MENU.getMode());
+				bgm[6].stop();
+				gameSet();
 			}
-        }
+		}
+	}
+
+	private void drawStringEx(Graphics2D g, String text, int x, int y, Color borderColor, float borderWidth) {
+		Font f = g.getFont();
+		Color previousColor = g.getColor();
+		GlyphVector v = f.createGlyphVector(getFontMetrics(f).getFontRenderContext(), text);
+		Shape shape = v.getOutline();
+
+		Rectangle bounds = shape.getBounds();
+		g.translate(x - bounds.x, y - bounds.y);
+
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g.setColor(g.getColor());
+		g.fill(shape);
+		g.setColor(borderColor);
+		g.setStroke(new BasicStroke(borderWidth));
+		g.draw(shape);
+		g.setColor(previousColor);
+
+		g.translate((x - bounds.x) * -1, (y - bounds.y) * -1);
 	}
 
 }
