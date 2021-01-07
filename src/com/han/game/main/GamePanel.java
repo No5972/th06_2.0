@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 
 import com.han.game.control.GetKeys;
 import com.han.game.enums.MenuMode;
+import com.han.game.model.CFPSMaker;
 import com.han.game.model.GameObject;
 import com.han.game.model.Player;
 
@@ -36,6 +37,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	private Image dbImage;
 	private Thread gameLoop;
 	private GetKeys getKeys;
+	private CFPSMaker fpsMaker;
 	private int back_y;
 	private int time;
 	private int time2;
@@ -80,6 +82,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		dbImage = null;
 		player = new Player();
 		getKeys = new GetKeys();
+		fpsMaker = new CFPSMaker();
 		enemys = new ObjectsArray("Enemy", 50);
 		shoots = new ObjectsArray("Shoot", 200);
 		bullets = new ObjectsArray("Bullet", 400);
@@ -503,6 +506,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
 			}
 		}
+
+		fpsMaker.makeFPS();
+		this.drawStringEx(g, "FPS: " + fpsMaker.getFPS(), 740, 940, Color.WHITE, 0.7F);
 	}
 
 
