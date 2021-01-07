@@ -1,6 +1,6 @@
 package com.han.game.model;
 
-import java.awt.Graphics;
+import java.awt.*;
 
 import com.han.game.enums.HitObject;
 import com.han.game.main.GamePanel;
@@ -136,6 +136,12 @@ public class GameObject {
 							(int) py + 44, i * 3+i, 4 + j, i * 4 - 2-i, j * 2, null);
 				}
 			}
+
+			// 判定点
+			Color previousColor = g.getColor();
+			g.setColor(Color.white);
+			g.fillOval(new Double(px + 3).intValue(), new Double(py + 28).intValue() , 4, 4);
+			g.setColor(previousColor);
 		}
 		// 小妖精
 		if (size == 2) {
