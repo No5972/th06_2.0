@@ -154,6 +154,10 @@ public class Player extends GameObject {
 		} else {
 			shotInterval--;
 		}
+		
+		if (this.py < 300) {
+			p.bullets.setAllApproaching();
+		}
 
 		int i = 0;
 		do {
@@ -163,7 +167,7 @@ public class Player extends GameObject {
 			// 玩家被击中事件
 			if ((tmp = p.bullets.getObject(i)).getExist()) {
 				// 奖励事件
-				if (tmp.size == HitObject.POWER.getSize() || tmp.size == HitObject.POINT.getSize()) {
+				if (tmp.size == HitObject.POWER.getSize() || tmp.size == HitObject.POINT.getSize() || tmp.size == HitObject.SMALL_POINT.getSize()) {
 					if (25 > Math.hypot((px + 5) - (tmp.getPx() + tmp.getSize() / 2),
 							(py + 15) - (tmp.getPy() + tmp.getSize() / 2))) {
 						if (tmp.size == HitObject.POWER.getSize()) { // 灵力
@@ -171,10 +175,15 @@ public class Player extends GameObject {
 							tmp.erase();
 							power++;
 							break;
-						} else { // 否则为 得点
+						} else if (tmp.size == HitObject.POINT.getSize()) { // 得点
 							p.bgm[10].play();
 							tmp.erase();
 							score += 100 + ( this.py > 300 ? 1000 - this.py : 700 );
+							break;
+						} else { // 消弹
+							p.bgm[10].play();
+							tmp.erase();
+							score += (100 + ( this.py > 300 ? 1000 - this.py : 700 )) / 10;
 							break;
 						}
 					}

@@ -81,23 +81,39 @@ public class ObjectsArray {
 			if (gameObject[i].getSize() != HitObject.LIFE.getSize() &&
 					gameObject[i].getSize() != HitObject.BOMB.getSize() &&
 					gameObject[i].getSize() != HitObject.POINT.getSize() &&
-					gameObject[i].getSize() != HitObject.POWER.getSize())
+					gameObject[i].getSize() != HitObject.POWER.getSize() &&
+					gameObject[i].getSize() != HitObject.SMALL_POINT.getSize())
 				gameObject[i].erase();
 	}
 	
 	/**
-	 * 击败一个符时所有弹幕变为得点道具
+	 * 击败一个符时所有弹幕变为<s>得点道具</s>消弹道具
 	 */
 	public void convertToPowerups() {
 		for (i = 0; i < arrayMax; i++)
 			if (gameObject[i].getSize() != HitObject.LIFE.getSize() &&
 					gameObject[i].getSize() != HitObject.BOMB.getSize() &&
 					gameObject[i].getSize() != HitObject.POINT.getSize() &&
-					gameObject[i].getSize() != HitObject.POWER.getSize()) {
-				gameObject[i].setSize(HitObject.POINT.getSize());
+					gameObject[i].getSize() != HitObject.POWER.getSize() &&
+					gameObject[i].getSize() != HitObject.SMALL_POINT.getSize()) {
+				gameObject[i].setSize(HitObject.SMALL_POINT.getSize());
 				gameObject[i].setVx(0);
 				gameObject[i].setVy(5);
 			}
+	}
+	
+	public void setAllApproaching() {
+		for (i = 0; i < arrayMax; i++) {
+			if (gameObject[i].getSize() == HitObject.LIFE.getSize() || 
+					gameObject[i].getSize() == HitObject.BOMB.getSize() || 
+					gameObject[i].getSize() == HitObject.POINT.getSize() || 
+					gameObject[i].getSize() == HitObject.POWER.getSize() ||
+					gameObject[i].getSize() == HitObject.SMALL_POINT.getSize()) {
+				gameObject[i].setApporaching(true);
+			} else {
+				gameObject[i].setApporaching(false);
+			}
+		}
 	}
 	
 	// 返回空闲数组位

@@ -21,6 +21,10 @@ public enum HitObject {
      */
     LIFE(9),
     /**
+     * 消弹道具
+     */
+    SMALL_POINT(10),
+    /**
      * 敌机子弹A
      */
     EMENY_SHOT_A(15),

@@ -9,6 +9,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.font.GlyphVector;
+import java.awt.image.BufferedImage;
+import java.awt.image.FilteredImageSource;
+import java.awt.image.ImageFilter;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
+import java.awt.image.RGBImageFilter;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -64,6 +70,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	public Image aImg;
 	public Image boImg;
 	public Image iconImg;
+	public Image frontImg;
 	public Player player;
 	public ObjectsArray enemys;
 	public ObjectsArray shoots;
@@ -85,7 +92,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		fpsMaker = new CFPSMaker();
 		enemys = new ObjectsArray("Enemy", 50);
 		shoots = new ObjectsArray("Shoot", 200);
-		bullets = new ObjectsArray("Bullet", 400);
+		bullets = new ObjectsArray("Bullet", 800);
 		boss = new ObjectsArray("Boss", 10);
 		menuMode = MenuMode.MAIN_MENU.getMode();
 		isM = false;
@@ -122,6 +129,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
 		ImageIcon imageicon9 = new ImageIcon(getClass().getResource("/images/timg.jpg"));
 		iconImg = imageicon9.getImage();
+		
+		ImageIcon frontImage = new ImageIcon(getClass().getResource("/images/front.png"));
+		frontImg = frontImage.getImage();
 
 		// 音乐
 		bgm[0]=Applet.newAudioClip(getClass().getResource("/sounds/th06_01.wav"));
@@ -133,7 +143,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		bgm[6]=Applet.newAudioClip(getClass().getResource("/sounds/th06_17.wav"));
 		bgm[7]=Applet.newAudioClip(getClass().getResource("/sounds/don00.wav"));
 		bgm[8]=Applet.newAudioClip(getClass().getResource("/sounds/se_plst00.wav")); // 攻击
-		bgm[9]=Applet.newAudioClip(getClass().getResource("/sounds/se_slash.wav")); // 小怪被毁
+		bgm[9]=Applet.newAudioClip(getClass().getResource("/sounds/se_enep00.wav")); // 小怪被毁
 		bgm[10]=Applet.newAudioClip(getClass().getResource("/sounds/se_item00.wav")); // 拾取道具
 
 		// 开启焦点-按键
@@ -292,7 +302,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 				bGM(0, 1);
 				// 游戏开始界面
 				ImageIcon imageicon = new ImageIcon(getClass().
-						getResource("/images/title00.png"));
+						getResource("/images/title00.jpg"));
 				Image menu = imageicon.getImage();
 				// 标题字体
 				imageicon = new ImageIcon(getClass().getResource("/images/front.png"));
@@ -556,12 +566,19 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	 * @param g 画分，画火力，B弹
 	 */
 	public void paintScore(Graphics2D g) {
-		g.setColor(new Color(0xFF0000));
-		g.setFont(new Font("KaiTi", Font.BOLD, 20));
-		this.drawStringEx(g, "SCORE: " + player.getScore(), 600, 200, Color.WHITE, 0.5F);
-		this.drawStringEx(g, "POWER: " + player.getPower(), 600, 300, Color.WHITE, 0.5F);
-		this.drawStringEx(g, "BOMB: " + player.getBoom(), 600, 400, Color.WHITE, 0.5F);
+		g.setColor(new Color(0xAAAAAA));
+		g.setFont(new Font("Sylfaen", Font.BOLD, 20));
+		
+		this.drawStringEx(g, "" + player.getScore(), 660, 200, Color.WHITE, 0.5F);
+		// this.drawTransparentImage(g, Color.BLACK, frontImg, 600, 200, 631, 617, 0, 207, 31, 224);
+		// this.drawTransparentImage(g, new Color(0,0,0), frontImg, 600, 200, 631, 217, 0, 207, 31, 224);
+		g.drawImage(frontImg, 600, 200, 631, 217, 0, 207, 31, 224, null);
+		this.drawStringEx(g, "" + player.getPower(), 660, 300, Color.WHITE, 0.5F);
+		g.drawImage(frontImg, 600, 300, 648, 317, 34, 207, 82, 224, null);
+		this.drawStringEx(g, "" + player.getBoom(), 660, 400, Color.WHITE, 0.5F);
+		g.drawImage(frontImg, 600, 400, 644, 417, 0, 160, 44, 177, null);
 		// g.drawStringEx("现在可以按键暂停：ESC", 580, 700);
+		g.setFont(new Font("Kaiti", Font.BOLD, 20));
 		this.drawStringEx(g, "现在可以按键暂停：ESC", 580, 700, Color.WHITE, 0.5F);
 		this.drawStringEx(g, "现在可以按键无敌：SPACE", 580, 750, Color.WHITE, 0.5F);
 
@@ -744,6 +761,31 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		g.setColor(previousColor);
 
 		g.translate((x - bounds.x) * -1, (y - bounds.y) * -1);
+	}
+	
+	private void drawTransparentImage(Graphics2D g, Color color, Image im, int dx1, int dy1, int dx2, int dy2, int sx1, int sy1, int sx2, int sy2) {
+		ImageFilter filter = new RGBImageFilter() {
+			public int markerRGB = color.getRGB() | 0xFF000000;
+	 
+			@Override
+			public final int filterRGB(int x, int y, int rgb) {
+				if ((rgb | 0xFF000000) == markerRGB) {
+					return 0x00FFFFFF & rgb;
+				} else {
+					return rgb;
+				}
+			}
+		};
+	 
+		ImageProducer ip = new FilteredImageSource(im.getSource(), filter);
+		Image toolkitImage = Toolkit.getDefaultToolkit().createImage(ip);
+	 
+		BufferedImage bi = new BufferedImage(im.getWidth(null), im.getHeight(null), BufferedImage.TYPE_4BYTE_ABGR);
+		Graphics2D g2d = bi.createGraphics();
+		g2d.drawImage(toolkitImage, 0, 0, im.getWidth(null), im.getHeight(null), null);
+		g2d.dispose();
+		
+		g.drawImage(bi, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, null);
 	}
 
 }

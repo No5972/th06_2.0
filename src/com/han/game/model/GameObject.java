@@ -27,6 +27,7 @@ public class GameObject {
 	protected char anim;
 	protected boolean exist;
 	protected GameObject tmp;
+	protected boolean isApporaching;
 
 	public int count;
 	
@@ -38,7 +39,7 @@ public class GameObject {
 		th = 0;
 		exist = false;
 		anim = 'n';
-		
+		isApporaching = false;
 	}
 
 	public static void gameObjectInit(GamePanel gamepanel) {
@@ -69,6 +70,7 @@ public class GameObject {
 		life = l;
 		anim = m;
 		exist = true;
+		isApporaching = false;
 	}
 
 	int i = 32;
@@ -219,6 +221,11 @@ public class GameObject {
 			g.drawImage(p.aImg, (int) px - 16, (int) py - 16, (int) px + 12,
 					(int) py + 14, 16, 1, 31, 16, null);
 		}
+		// 奖励-消弹
+		if (size == HitObject.SMALL_POINT.getSize()) {
+			g.drawImage(p.aImg, (int) px - 16, (int) py - 16, (int) px + 12,
+					(int) py + 14, 96, 1, 111, 16, null);
+		}
 		// 奖励-Boom
 		if (size == HitObject.BOMB.getSize()) {
 			g.drawImage(p.aImg, (int) px - 16, (int) py - 16, (int) px + 12,
@@ -317,11 +324,20 @@ public class GameObject {
 		py += vy;
 		frame++;
 		
-		if (this.size == HitObject.POWER.getSize() || 
-				this.size == HitObject.POINT.getSize() || 
-				this.size == HitObject.BOMB.getSize() || 
-				this.size == HitObject.LIFE.getSize()) {
+		if (this.isPowerup()) {
 			this.setVy(this.getVy() + 0.1);
+		}
+		
+		// is apporaching => apporach
+		if (this.isApporaching) {
+			double distance = Math.hypot(p.player.px - px, p.player.py - py);
+			if (distance > 15) {
+				this.setVx(15 * ((p.player.px - px) / distance));
+				this.setVy(15 * ((p.player.py - py) / distance));
+			} else {
+				this.setVx(5 * ((p.player.px - px) / distance));
+				this.setVy(5 * ((p.player.py - py) / distance));
+			}
 		}
 		
 		if (px < -10 || py < -200 || px > 560 || py > 1000)
@@ -383,6 +399,22 @@ public class GameObject {
 
 	public void setVy(double vy) {
 		this.vy = vy;
+	}
+
+	public boolean isApporaching() {
+		return isApporaching;
+	}
+
+	public void setApporaching(boolean isApporaching) {
+		this.isApporaching = isApporaching;
+	}
+	
+	private boolean isPowerup() {
+		return this.size == HitObject.POWER.getSize() || 
+				this.size == HitObject.POINT.getSize() || 
+				this.size == HitObject.BOMB.getSize() || 
+				this.size == HitObject.LIFE.getSize() ||
+				this.size == HitObject.SMALL_POINT.getSize();
 	}
 
 }
