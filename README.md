@@ -56,5 +56,6 @@
 ![image](https://github.com/No5972/th06_2.0/blob/master/pictures/5.png)
 ![image](https://github.com/No5972/th06_2.0/blob/master/pictures/6.png)
 ![image](https://github.com/No5972/th06_2.0/blob/master/pictures/7.png)
+![image](https://github.com/No5972/th06_2.0/blob/master/pictures/7a.png)
 ![image](https://github.com/No5972/th06_2.0/blob/master/pictures/8.png)
 ![image](https://github.com/No5972/th06_2.0/blob/master/pictures/9.png)
