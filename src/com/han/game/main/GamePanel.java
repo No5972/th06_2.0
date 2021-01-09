@@ -503,6 +503,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 				g.drawImage(ve, 0, 0, 850, 1000, 0, 0, 640, 480, null);
 				Font previousFont = g.getFont();
 				g.setFont(new Font("KaiTi", Font.BOLD, 36));
+				g.setColor(Color.RED);
 				this.drawStringEx(g, "終 わ り", 300, 20, Color.WHITE, 0.7F);
 				this.drawStringEx(g, "最终得点：" + player.getScore(), 200, 60, Color.WHITE, 0.7F);
 				g.setFont(previousFont);
