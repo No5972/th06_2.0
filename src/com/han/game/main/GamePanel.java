@@ -208,6 +208,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		menuMode = MenuMode.MAIN_MENU.getMode();
 		// 载入角色信息
 		player.setData(312, 539, 0, 0, 1, 0, 0, 10, 'n');
+		player.setBoom(3 - player.getBoom());
 		shoots.allErase();
 		bullets.allErase();
 		enemys.allErase();
@@ -290,8 +291,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		}
 		// 玩家血条
 		g.setColor(Color.red);
-		g.drawRect(600, 600, 200, 10);
-		g.fillRect(600, 600, player.getLife() * 20, 11);
+		g.drawRect(600, 350, 200, 10);
+		g.fillRect(600, 350, player.getLife() * 20, 11);
 
 
 		// 分数和火力
@@ -510,7 +511,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 				ImageIcon imageicon = new ImageIcon(getClass().
 						getResource("/images/pause.png"));
 				Image dead = imageicon.getImage();
-				g.drawImage(dead, 0, 0, 800, 900, 0, 0, 850, 1000, null);
+				g.drawImage(dead, -50, 50, 750, 950, 0, 0, 850, 1000, null);
 				if (getKeys.esc) {
 					setMenuMode(MenuMode.LOADING.getMode());
 					getKeys.esc = false;
@@ -578,7 +579,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		if (player.getPower() < 15) {
             this.drawStringEx(g, "" + player.getPower(), 660, 250, Color.WHITE, 0.5F);
         } else {
-		    g.drawImage(frontImg, 660, 255, 704, 268, 64, 244, 108, 258, null);
+		    g.drawImage(frontImg, 660, 250, 719, 268, 64, 244, 108, 258, null);
         }
 		g.drawImage(frontImg, 600, 250, 648, 267, 34, 207, 82, 224, null);
 		this.drawStringEx(g, "" + player.getBoom(), 660, 300, Color.WHITE, 0.5F);
@@ -588,18 +589,18 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         ImageIcon imageicon = new ImageIcon(getClass().getResource("/images/front.png"));
         Image title = imageicon.getImage();
         int i = 60;
-        g.drawImage(title, 590, 350, 791, 551, 125, 125, 255, 255, null); // 圈
-        g.drawImage(title, 590, 350, 654, 414, 0, 0, 64, 64, null); // 东
-        g.drawImage(title, 660, 350, 724, 414, 64, 0, 128, 64, null); // 方
-        g.drawImage(title, 630, 390, 757, 507, 128, 0, 192, 64, null); // 红
-        g.drawImage(title, 670, 480, 734, 544, 192, 0, 256, 64, null); // 魔
-        g.drawImage(title, 740, 480, 804, 544, 0, 64, 64, 128, null); // 乡
+        g.drawImage(title, 590, 650, 791, 851, 125, 125, 255, 255, null); // 圈
+        g.drawImage(title, 590, 650, 654, 714, 0, 0, 64, 64, null); // 东
+        g.drawImage(title, 660, 650, 724, 714, 64, 0, 128, 64, null); // 方
+        g.drawImage(title, 630, 690, 757, 807, 128, 0, 192, 64, null); // 红
+        g.drawImage(title, 670, 780, 734, 844, 192, 0, 256, 64, null); // 魔
+        g.drawImage(title, 740, 780, 804, 844, 0, 64, 64, 128, null); // 乡
 
 
 		// g.drawStringEx("现在可以按键暂停：ESC", 580, 700);
 		g.setFont(new Font("Kaiti", Font.BOLD, 20));
-		this.drawStringEx(g, "现在可以按键暂停：ESC", 580, 700, Color.WHITE, 0.5F);
-		this.drawStringEx(g, "现在可以按键无敌：SPACE", 580, 750, Color.WHITE, 0.5F);
+		this.drawStringEx(g, "现在可以按键暂停：ESC", 580, 500, Color.WHITE, 0.5F);
+		this.drawStringEx(g, "现在可以按键无敌：SPACE", 580, 550, Color.WHITE, 0.5F);
 
 		if (time4 == 20) {
 			bgm[7].loop();
@@ -607,7 +608,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		if (time4 >= 0) {
 			g.setColor(new Color(0xFF0000));
 			g.setFont(new Font("KaiTi", Font.BOLD, 40));
-			this.drawStringEx(g, "倒计时: " + time4, 600, 500, Color.WHITE, 0.7F);
+			this.drawStringEx(g, "倒计时: " + time4, 600, 400, Color.WHITE, 0.7F);
 		}
 
 		g.setPaint(gp);
@@ -665,7 +666,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
 			// 屏幕睡眠
 			try {
-				Thread.sleep(20);
+				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
