@@ -76,6 +76,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	public ObjectsArray shoots;
 	public ObjectsArray bullets;
 	public ObjectsArray boss;
+	public ObjectsArray getScores;
 	public Point moveP = new Point(0, 0);
 	public Point checkP;
 	public AudioClip bgm[];
@@ -94,6 +95,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		shoots = new ObjectsArray("Shoot", 200);
 		bullets = new ObjectsArray("Bullet", 800);
 		boss = new ObjectsArray("Boss", 10);
+		getScores = new ObjectsArray("GetScore", 500);
 		menuMode = MenuMode.MAIN_MENU.getMode();
 		isM = false;
 		time = 0;
@@ -212,6 +214,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		shoots.allErase();
 		bullets.allErase();
 		enemys.allErase();
+		getScores.allErase();
 		time2 = 0;
 	}
 
@@ -225,6 +228,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 			shoots.allMove();
 			enemys.allMove();
 			boss.allMove();
+			getScores.allMove();
 			player.move(getKeys);
 			if (getKeys.esc) {
 				setMenuMode(MenuMode.PAUSE.getMode());
@@ -244,7 +248,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 			if (dbImage == null)
 				return;
 			g = (Graphics2D) dbImage.getGraphics();
-			g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		}
 
 		// 背景叠加循环
@@ -259,6 +263,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		enemys.allDraw(g);
 		bullets.allDraw(g);
 		boss.allDraw(g);
+		getScores.allDraw(g);
 
 		if (isM) {
 			ImageIcon imageicon = new ImageIcon(getClass().getResource("/images/stg7enm.png"));
@@ -291,8 +296,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		}
 		// 玩家血条
 		g.setColor(Color.red);
-		g.drawRect(600, 350, 200, 10);
-		g.fillRect(600, 350, player.getLife() * 20, 11);
+		// g.drawRect(600, 350, 200, 10);
+		// g.fillRect(600, 350, player.getLife() * 20, 11);
+		g.drawRect(655, 345, 145, 25);
+		g.fillRect(655, 345, 145 * player.getLife() / 10, 25);
 
 
 		// 分数和火力
@@ -566,9 +573,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	 * @param g 画分，画火力，B弹
 	 */
 	public void paintScore(Graphics2D g) {
-		g.setColor(new Color(0xAAAAAA));
+		g.setColor(new Color(0xFFFFFF));
 		Paint gp = g.getPaint();
-		GradientPaint newGp = new GradientPaint(0,0,Color.WHITE,0,15,new Color(0x888888));
+		// GradientPaint newGp = new GradientPaint(0,0,Color.WHITE,0,7,Color.GRAY);
+		LinearGradientPaint newGp = new LinearGradientPaint(0, 0, 0, 7, new float[]{0F,1F}, new Color[] {Color.RED, Color.GRAY} );
 		g.setPaint(newGp);
 		g.setFont(new Font("Sylfaen", Font.BOLD, 20));
 
@@ -576,14 +584,19 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		// this.drawTransparentImage(g, Color.BLACK, frontImg, 600, 200, 631, 617, 0, 207, 31, 224);
 		// this.drawTransparentImage(g, new Color(0,0,0), frontImg, 600, 200, 631, 217, 0, 207, 31, 224);
 		g.drawImage(frontImg, 600, 200, 631, 217, 0, 207, 31, 224, null);
+		
 		if (player.getPower() < 15) {
+			g.fillRect(655, 245, 145 * player.getPower() / 15, 25);
             this.drawStringEx(g, "" + player.getPower(), 660, 250, Color.WHITE, 0.5F);
         } else {
+        	g.fillRect(655, 245, 145, 25);
 		    g.drawImage(frontImg, 660, 250, 719, 268, 64, 244, 108, 258, null);
         }
 		g.drawImage(frontImg, 600, 250, 648, 267, 34, 207, 82, 224, null);
 		this.drawStringEx(g, "" + player.getBoom(), 660, 300, Color.WHITE, 0.5F);
 		g.drawImage(frontImg, 600, 300, 644, 317, 0, 160, 44, 177, null);
+		
+		g.drawImage(frontImg, 600, 350, 650, 367, 0, 176, 50, 193, null);
 
         // 标题字体
         ImageIcon imageicon = new ImageIcon(getClass().getResource("/images/front.png"));

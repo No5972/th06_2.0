@@ -7,6 +7,7 @@ import com.han.game.model.Boss;
 import com.han.game.model.Bullet;
 import com.han.game.model.Enemy;
 import com.han.game.model.GameObject;
+import com.han.game.model.GetScore;
 import com.han.game.model.Shoot;
 
 /**
@@ -45,6 +46,9 @@ public class ObjectsArray {
 			}
 			if (s.equals("Boss")) {
 				gameObject[i] = new Boss();
+			}
+			if (s.equals("GetScore")) {
+				gameObject[i] = new GetScore();
 			}
 		}
 	}
@@ -133,6 +137,13 @@ public class ObjectsArray {
 			}
 		}
 		return null;
+	}
+	
+	public int getIndex(GameObject k) {
+		for (i = 0; i < arrayMax; i++) {
+			if (gameObject[i] == k) return i;
+		}
+		return -1;
 	}
 
 	public GameObject getObject(int j) {

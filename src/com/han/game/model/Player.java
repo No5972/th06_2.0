@@ -1,6 +1,7 @@
 package com.han.game.model;
 
 import java.awt.Graphics;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import com.han.game.consts.Constants;
 import com.han.game.control.GetKeys;
 import com.han.game.enums.HitObject;
 import com.han.game.enums.MenuMode;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 /**
  * 自机主类
@@ -173,17 +175,42 @@ public class Player extends GameObject {
 						if (tmp.size == HitObject.POWER.getSize()) { // 灵力
 							p.bgm[10].play();
 							tmp.erase();
+							
+							if (this.power >= 15) {
+								score += 100;
+								if ((tmp = p.getScores.getEmpty()) != null) {
+									tmp.setData(px, py, 0, -2, -11, 0, 0, 100, 'n');
+								}
+							} else {
+								score += 10;
+								if ((tmp = p.getScores.getEmpty()) != null) {
+									tmp.setData(px, py, 0, -2, -11, 0, 0, 10, 'n');
+								}
+							}
+							
 							power++;
 							break;
 						} else if (tmp.size == HitObject.POINT.getSize()) { // 得点
 							p.bgm[10].play();
+							// System.out.println(p.bullets.getIndex(tmp) + "-" + tmp.exist);
 							tmp.erase();
 							score += 100 + ( this.py > 300 ? 1000 - this.py : 700 );
+							
+							
+							if ((tmp = p.getScores.getEmpty()) != null) {
+								tmp.setData(px, py, 0, -2, -11, 0, 0, (int) ( this.py > 300 ? 1000 - this.py : 700 ), 'n');
+							}
+							
 							break;
 						} else { // 消弹
 							p.bgm[10].play();
 							tmp.erase();
 							score += (100 + ( this.py > 300 ? 1000 - this.py : 700 )) / 10;
+							
+							if ((tmp = p.getScores.getEmpty()) != null) {
+								tmp.setData(px, py, 0, -2, -11, 0, 0, (int) (( this.py > 300 ? 1000 - this.py : 700 ) / 10 ), 'n');
+							}
+							
 							break;
 						}
 					}

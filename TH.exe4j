@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <exe4j version="7.0" transformSequenceNumber="3">
-  <directoryPresets config="D:/workspace/th06_2.0/classes/artifacts/TouHouProject_2_0_jar/jre/lib" />
-  <application name="東方赤魔鄉" distributionSourceDir="D:/workspace/th06_2.0/bin/exe" />
-  <executable name="東方赤魔鄉" wrapperType="embed" executableDir="." executableMode="gui" />
+  <directoryPresets config="E:/workspace/th06_2.1" />
+  <application name="東方赤魔鄉" distributionSourceDir="E:/workspace/th06_2.1" />
+  <executable name="THJ" wrapperType="embed" iconSet="true" iconFile="E:/workspace/th06_2.0/src/images/executable.ico" executableDir="." executableMode="gui" />
   <java mainClass="com.han.game.main.Welcome" minVersion="1.8.0" maxVersion="14">
     <searchSequence>
       <registry />
       <directory location="./jre" />
     </searchSequence>
     <classPath>
-      <archive location="D:/workspace/th06_2.0/classes/artifacts/TouHouProject_2_0_jar/TouHouProject_2.0.jar" failOnError="false" />
+      <archive location="E:/workspace/th06_2.1/TH06_2.1.jar" failOnError="false" />
     </classPath>
   </java>
 </exe4j>

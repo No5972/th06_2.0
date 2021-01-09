@@ -142,9 +142,9 @@ public class GameObject {
 			// 判定点
 			Color previousColor = g.getColor();
 			g.setColor(Color.white);
-			g.fillOval(new Double(px + 3).intValue(), new Double(py + 13).intValue() , 4, 4);
+			g.fillOval(new Double(px - 2).intValue(), new Double(py + 2).intValue() , 14, 14);
 			g.setColor(Color.red);
-			g.drawOval(new Double(px + 2).intValue(), new Double(py + 12).intValue() , 6, 6);
+			g.drawOval(new Double(px - 3).intValue(), new Double(py + 1).intValue() , 16, 16);
 			g.setColor(previousColor);
 		}
 		// 小妖精
@@ -316,6 +316,16 @@ public class GameObject {
 					(int) py - 5, 48, 48, 64, 64, null);
 		}
 		
+		// 获得的分数
+		if (size == -11) {
+			Color previousColor = g.getColor();
+			if (life >= 700) {
+				g.setColor(Color.YELLOW);
+			}
+			g.drawString(this.toString(), (int) px - 30, (int) py);
+			g.setColor(previousColor);
+		}
+		
 	}
 	
 
@@ -331,13 +341,17 @@ public class GameObject {
 		// is apporaching => apporach
 		if (this.isApporaching) {
 			double distance = Math.hypot(p.player.px - px, p.player.py - py);
-			if (distance > 15) {
-				this.setVx(15 * ((p.player.px - px) / distance));
-				this.setVy(15 * ((p.player.py - py) / distance));
+			this.setVx(20 * ((p.player.px - px) / distance));
+			this.setVy(20 * ((p.player.py - py) / distance));
+			/*
+			if (distance > 25) {
+				this.setVx(20 * ((p.player.px - px) / distance));
+				this.setVy(20 * ((p.player.py - py) / distance));
 			} else {
-				this.setVx(5 * ((p.player.px - px) / distance));
-				this.setVy(5 * ((p.player.py - py) / distance));
+				this.setVx(20 * ((p.player.px - px) / distance));
+				this.setVy(20 * ((p.player.py - py) / distance));
 			}
+			*/
 		}
 		
 		if (px < -10 || py < -200 || px > 560 || py > 1000)
