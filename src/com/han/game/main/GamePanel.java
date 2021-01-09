@@ -567,8 +567,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	 */
 	public void paintScore(Graphics2D g) {
 		g.setColor(new Color(0xAAAAAA));
+		Paint gp = g.getPaint();
+		GradientPaint newGp = new GradientPaint(0,0,Color.WHITE,0,8,new Color(0xAAAAAA));
+		g.setPaint(newGp);
 		g.setFont(new Font("Sylfaen", Font.BOLD, 20));
-		
+
 		this.drawStringEx(g, "" + player.getScore(), 660, 200, Color.WHITE, 0.5F);
 		// this.drawTransparentImage(g, Color.BLACK, frontImg, 600, 200, 631, 617, 0, 207, 31, 224);
 		// this.drawTransparentImage(g, new Color(0,0,0), frontImg, 600, 200, 631, 217, 0, 207, 31, 224);
@@ -591,7 +594,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 			this.drawStringEx(g, "倒计时: " + time4, 600, 500, Color.WHITE, 0.7F);
 		}
 
-
+		g.setPaint(gp);
 
 	}
 
@@ -745,7 +748,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
 	private void drawStringEx(Graphics2D g, String text, int x, int y, Color borderColor, float borderWidth) {
 		Font f = g.getFont();
-		Color previousColor = g.getColor();
+		Paint previousPaint = g.getPaint();
 		GlyphVector v = f.createGlyphVector(getFontMetrics(f).getFontRenderContext(), text);
 		Shape shape = v.getOutline();
 
@@ -758,7 +761,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		g.setColor(borderColor);
 		g.setStroke(new BasicStroke(borderWidth));
 		g.draw(shape);
-		g.setColor(previousColor);
+		g.setPaint(previousPaint);
 
 		g.translate((x - bounds.x) * -1, (y - bounds.y) * -1);
 	}
