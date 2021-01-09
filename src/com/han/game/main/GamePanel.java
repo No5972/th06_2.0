@@ -319,12 +319,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 				////////////////////////////////////////////
 				int i = 60;
 				g.drawImage(menu, 0, 0, 850, 1000, 0, 0, 640, 480, null);
-				g.drawImage(title, 1, 1, 128, 128, 0, 0, 64, 64, null);
-				g.drawImage(title, 71 + i, 10, 198 + i, 137, 64, 0, 128, 64, null);
-				g.drawImage(title, 141 + 2 * i, 10, 268 + 4 * i, 128 + i,
-						128, 0, 192, 64, null);
-				g.drawImage(title, 211 + 5 * i, 10, 338 + 5 * i, 137, 192, 0, 256, 64, null);
-				g.drawImage(title, 281 + 6 * i, 10, 408 + 6 * i, 137, 0, 64, 64, 128, null);
+				g.drawImage(title, 1, 1, 128, 128, 0, 0, 64, 64, null); // 东
+				g.drawImage(title, 71 + i, 10, 198 + i, 137, 64, 0, 128, 64, null); // 方
+				g.drawImage(title, 141 + 2 * i, 10, 268 + 4 * i, 128 + i, 128, 0, 192, 64, null); // 红
+				g.drawImage(title, 211 + 5 * i, 10, 338 + 5 * i, 137, 192, 0, 256, 64, null); // 魔
+				g.drawImage(title, 281 + 6 * i, 10, 408 + 6 * i, 137, 0, 64, 64, 128, null); // 乡
 				// 按钮
 				g.drawImage(start, 600, 400, 800, 500, 0, 0, 100, 32, null);
 				g.drawImage(help, 600, 530, 800, 630, 0, 0, 52, 32, null);
@@ -568,7 +567,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	public void paintScore(Graphics2D g) {
 		g.setColor(new Color(0xAAAAAA));
 		Paint gp = g.getPaint();
-		GradientPaint newGp = new GradientPaint(0,0,Color.WHITE,0,8,new Color(0xAAAAAA));
+		GradientPaint newGp = new GradientPaint(0,0,Color.WHITE,0,15,new Color(0x888888));
 		g.setPaint(newGp);
 		g.setFont(new Font("Sylfaen", Font.BOLD, 20));
 
@@ -576,10 +575,27 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		// this.drawTransparentImage(g, Color.BLACK, frontImg, 600, 200, 631, 617, 0, 207, 31, 224);
 		// this.drawTransparentImage(g, new Color(0,0,0), frontImg, 600, 200, 631, 217, 0, 207, 31, 224);
 		g.drawImage(frontImg, 600, 200, 631, 217, 0, 207, 31, 224, null);
-		this.drawStringEx(g, "" + player.getPower(), 660, 300, Color.WHITE, 0.5F);
-		g.drawImage(frontImg, 600, 300, 648, 317, 34, 207, 82, 224, null);
-		this.drawStringEx(g, "" + player.getBoom(), 660, 400, Color.WHITE, 0.5F);
-		g.drawImage(frontImg, 600, 400, 644, 417, 0, 160, 44, 177, null);
+		if (player.getPower() < 15) {
+            this.drawStringEx(g, "" + player.getPower(), 660, 250, Color.WHITE, 0.5F);
+        } else {
+		    g.drawImage(frontImg, 660, 255, 704, 268, 64, 244, 108, 258, null);
+        }
+		g.drawImage(frontImg, 600, 250, 648, 267, 34, 207, 82, 224, null);
+		this.drawStringEx(g, "" + player.getBoom(), 660, 300, Color.WHITE, 0.5F);
+		g.drawImage(frontImg, 600, 300, 644, 317, 0, 160, 44, 177, null);
+
+        // 标题字体
+        ImageIcon imageicon = new ImageIcon(getClass().getResource("/images/front.png"));
+        Image title = imageicon.getImage();
+        int i = 60;
+        g.drawImage(title, 590, 350, 791, 551, 125, 125, 255, 255, null); // 圈
+        g.drawImage(title, 590, 350, 654, 414, 0, 0, 64, 64, null); // 东
+        g.drawImage(title, 660, 350, 724, 414, 64, 0, 128, 64, null); // 方
+        g.drawImage(title, 630, 390, 757, 507, 128, 0, 192, 64, null); // 红
+        g.drawImage(title, 670, 480, 734, 544, 192, 0, 256, 64, null); // 魔
+        g.drawImage(title, 740, 480, 804, 544, 0, 64, 64, 128, null); // 乡
+
+
 		// g.drawStringEx("现在可以按键暂停：ESC", 580, 700);
 		g.setFont(new Font("Kaiti", Font.BOLD, 20));
 		this.drawStringEx(g, "现在可以按键暂停：ESC", 580, 700, Color.WHITE, 0.5F);
