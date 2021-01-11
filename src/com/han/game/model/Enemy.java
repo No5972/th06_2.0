@@ -176,7 +176,7 @@ public class Enemy extends GameObject {
 			else if (life > 0) {
 				px = 280;
 				py = 320;
-				System.out.println(isM);
+				// System.out.println(isM);
 				count++;
 				if (count > 300) {
 					count = 210;
